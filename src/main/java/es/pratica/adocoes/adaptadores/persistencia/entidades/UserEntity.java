@@ -1,4 +1,4 @@
-package es.pratica.adocoes.interfacesAdaptadoras.persistencia.entidades;
+package es.pratica.adocoes.adaptadores.persistencia.entidades;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
