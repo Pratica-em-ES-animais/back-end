@@ -1,5 +1,7 @@
 package es.pratica.adocoes.dominio.servicos;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import es.pratica.adocoes.dominio.interfacerepositorios.UserRepository;
@@ -23,10 +25,14 @@ public class UserService implements UserServiceInterface{
     }
 
     @Override
-    public UserModel getById(String id) {
+    public Optional<UserModel> getById(String id) {
         return this.userRepositorio.getById(id);
     }
 
+    @Override
+    public Optional<UserModel> getByEmail(String email) {
+        return this.userRepositorio.getByEmail(email);
+    }
 
    
 }

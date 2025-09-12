@@ -1,5 +1,7 @@
 package es.pratica.adocoes.adaptadores.persistencia.implementrepos;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Repository;
 
 import es.pratica.adocoes.adaptadores.persistencia.entidades.UserEntity;
@@ -19,16 +21,21 @@ public class UserRepoMongo implements UserRepository{
         return UserModel.toModel(response);
     }
     
-
     @Override
     public void removeAll(){
         this.userRepo.deleteAll();
     }
 
+    @Override
+    public Optional<UserModel> getById(String id) {
+        var response = this.userRepo.findById(id);
+        return response.map(ue -> UserModel.toModel(ue));
+    }
 
     @Override
-    public UserModel getById(String id) {
-        var response = this.userRepo.findById(id).orElse(null);
-        return (response == null) ? null : UserModel.toModel(response);
+    public Optional<UserModel> getByEmail(String email) {
+        var response = this.userRepo.findByEmail(email);
+        System.out.println("Aqui!");
+        return response.map(ue -> UserModel.toModel(ue));
     }
 }
