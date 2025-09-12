@@ -34,7 +34,7 @@ public class UserModel {
 
 
     public static UserModel toModel(UserEntity ue){
-       return new UserModel(ue.getId(), ue.getCpf(), ue.getFirstName(),ue.getLastName(), ue.getEmail(), ue.getDdd(),ue.getPhone());
+       return new UserModel(ue.getId(), ue.getCpf(), ue.getFirstName(),ue.getLastName(), ue.getEmail(), ue.getDdd(),ue.getPhone(), ue.getSenha());
     }
 
 
