@@ -5,18 +5,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import es.pratica.adocoes.aplicacao.casosdeuso.CriarUsuarioUC;
+import es.pratica.adocoes.aplicacao.casosdeuso.CreateUserUC;
 import es.pratica.adocoes.aplicacao.dtos.UserDto;
 import lombok.AllArgsConstructor;
 
 @RestController
 @AllArgsConstructor
 public class UserController {
-    private final CriarUsuarioUC criarUsuarioUC;
+    private final CreateUserUC createUserUC;
 
-    @PostMapping("/api/criarUsuario")
+    @PostMapping("/api/createUser")
     @CrossOrigin("*")
-    public UserDto criarUsuario(@RequestBody() UserDto us){
-        return criarUsuarioUC.run(us);
+    public UserDto createUser(@RequestBody() UserDto us){
+        return createUserUC.run(us);
     }
 }
