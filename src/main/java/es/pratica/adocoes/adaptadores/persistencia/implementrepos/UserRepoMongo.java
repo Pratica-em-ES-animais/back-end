@@ -15,7 +15,8 @@ public class UserRepoMongo implements UserRepository{
 
     @Override
     public UserModel add(UserModel userModel) {
-        return UserModel.toModel(this.userRepo.save(UserEntity.fromModel(userModel)));
+        var response = this.userRepo.save(UserEntity.fromModel(userModel));
+        return UserModel.toModel(response);
     }
     
 
@@ -27,6 +28,7 @@ public class UserRepoMongo implements UserRepository{
 
     @Override
     public UserModel getById(String id) {
-        return UserModel.toModel(this.userRepo.findById(id).get());
+        var response = this.userRepo.findById(id).orElse(null);
+        return (response == null) ? null : UserModel.toModel(response);
     }
 }
