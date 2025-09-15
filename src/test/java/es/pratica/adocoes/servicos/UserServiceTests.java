@@ -1,10 +1,10 @@
 package es.pratica.adocoes.servicos;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -56,4 +56,11 @@ public class UserServiceTests {
         assertEquals(actual,expected);
     }
     
+    @Test 
+    public void shouldBeDifferent(){
+        String passwd = this.um.getSenha();
+        var response = this.userService.createUser(um);
+        assertNotEquals(passwd, response.getSenha());
+    }
+
 }
