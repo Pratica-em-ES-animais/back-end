@@ -1,7 +1,10 @@
-package es.pratica.adocoes.repositorios;
+package es.pratica.adocoes.servicos;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
+
+import java.util.Optional;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -22,13 +25,12 @@ public class UserServiceTests {
     private UserServiceInterface userService;
     private UserModel um;
     
-
     @BeforeAll
     public void init(){
         MockitoAnnotations.openMocks(this);
         this.um = new UserModel("12345678910", "Ronaldinho", "Gaucho","ronaldinho@gmail.com", "51", "981230036", "interCampeaoDoMundo");
     }
-
+    
     @Test
     public void shouldAddUser(){
         var response = this.userService.createUser(um);
@@ -42,7 +44,16 @@ public class UserServiceTests {
         var response = this.userService.createUser(um);
         this.userService.removeAll();
         var user = this.userService.getById(response.getId());
-        assertNull(user);
+        Optional<UserModel> actual = Optional.empty();
+        assertEquals(actual, user);
+    }
+
+    @Test
+    public void shouldNotBeNull(){
+        var response = this.userService.createUser(um);
+        var expected = this.userService.getByEmail(response.getEmail());
+        Optional<UserModel> actual = Optional.of(response);
+        assertEquals(actual,expected);
     }
     
 }
