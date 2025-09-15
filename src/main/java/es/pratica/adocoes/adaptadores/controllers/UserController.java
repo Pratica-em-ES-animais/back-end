@@ -14,7 +14,7 @@ import lombok.AllArgsConstructor;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/user/")
+@RequestMapping("/api/user")
 public class UserController {
     private final CreateUserUC createUserUC;
 

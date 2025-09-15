@@ -2,6 +2,7 @@ package es.pratica.adocoes.dominio.servicos;
 
 import java.util.Optional;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import es.pratica.adocoes.dominio.interfacerepositorios.UserRepository;
@@ -13,9 +14,11 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class UserService implements UserServiceInterface{
     private final UserRepository userRepositorio;
-    
+    private final PasswordEncoder passwordEncoder;
+
     @Override
     public UserModel createUser(UserModel userModel){
+        userModel.setSenha(this.passwordEncoder.encode(userModel.getSenha()));
         return this.userRepositorio.add(userModel);
     }
 
@@ -34,5 +37,4 @@ public class UserService implements UserServiceInterface{
         return this.userRepositorio.getByEmail(email);
     }
 
-   
 }

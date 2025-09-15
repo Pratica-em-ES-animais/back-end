@@ -12,7 +12,6 @@ public class CreateUserUC {
     private final UserServiceInterface cadastrarService;
     
     public UserDto run(UserDto us){
-        System.out.println("aqui!");
         if(cadastrarService.getByEmail(us.getEmail()).isEmpty()){
             return UserDto.fromModel(cadastrarService.createUser(UserDto.toModel(us)));
         }
