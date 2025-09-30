@@ -1,4 +1,7 @@
 # Back-end do ConectaPet
+
+[![codecov](https://codecov.io/github/Pratica-em-ES-animais/back-end/graph/badge.svg?token=W1NWOYOOSP)](https://codecov.io/github/Pratica-em-ES-animais/back-end)
+
 ### Print dos endpoints:
 <img width="1871" height="810" alt="image" src="https://github.com/user-attachments/assets/742f2205-b6f3-427e-937f-8fef4330ac4d" />
 
