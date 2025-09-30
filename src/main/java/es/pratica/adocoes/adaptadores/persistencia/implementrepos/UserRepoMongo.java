@@ -35,6 +35,9 @@ public class UserRepoMongo implements UserRepository{
     @Override
     public Optional<UserModel> getByEmail(String email) {
         var response = this.userRepo.findByEmail(email);
-        return response.map(ue -> UserModel.toModel(ue));
+        if(response.isPresent()){
+            return response.map(UserModel::toModel);
+        }
+        return Optional.empty();
     }
 }
