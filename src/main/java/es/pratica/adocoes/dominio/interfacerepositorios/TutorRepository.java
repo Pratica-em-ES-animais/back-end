@@ -5,6 +5,6 @@ import java.util.Optional;
 import es.pratica.adocoes.dominio.modelos.TutorModel;
 
 public interface  TutorRepository {
-    public TutorModel add(TutorModel userModel);
+    public TutorModel add(TutorModel tutorModel);
     public Optional<TutorModel> getByEmail(String email);
 }
