@@ -8,14 +8,17 @@ import com.mongodb.lang.NonNull;
 import es.pratica.adocoes.dominio.modelos.UserModel;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Negative;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Document
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class UserEntity {
     @Id
     private String id;
@@ -46,5 +49,4 @@ public class UserEntity {
         return new UserEntity(model.getId(), model.getCpf(), model.getFirstName(), 
                                 model.getLastName(), model.getEmail(), model.getDdd(), model.getPhone(), model.getSenha());
     }
-    protected UserEntity(){}
 }
