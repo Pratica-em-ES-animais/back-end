@@ -38,18 +38,18 @@ public class OngEntity {
     @Pattern(regexp = "9\\d{8}")
     private String phone;
     @NonNull
-    private AddressEntity addresEntity;
+    private AddressEntity addressEntity;
 
     public OngEntity(@Pattern(regexp = "[0-9]{11}") String cnpj,
             @Max(50) @Pattern(regexp = "[a-zA-ZÀ-ÿ\\- ]+") String name, @Email String email,
             @Pattern(regexp = "[0-9]{2}") String ddd, @Pattern(regexp = "[0-9]{9}") String phone,
-            AddressEntity addresEntity) {
+            AddressEntity addressEntity) {
         this.cnpj = cnpj;
         this.name = name;
         this.email = email;
         this.ddd = ddd;
         this.phone = phone;
-        this.addresEntity = addresEntity;
+        this.addressEntity = addressEntity;
     }
 
     public static OngEntity fromModel(OngModel ongModel) {

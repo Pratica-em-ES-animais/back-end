@@ -26,6 +26,6 @@ public class OngModel {
 
     public static OngModel toModel(OngEntity ongEntity) {
         return new OngModel(ongEntity.getId(), ongEntity.getCnpj(), ongEntity.getName(), ongEntity.getEmail(), 
-                ongEntity.getDdd(), ongEntity.getPhone(), AddressModel.toModel(ongEntity.getAddresEntity()));
+                ongEntity.getDdd(), ongEntity.getPhone(), AddressModel.toModel(ongEntity.getAddressEntity()));
     }
 }
