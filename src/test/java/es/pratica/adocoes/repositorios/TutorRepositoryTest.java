@@ -1,14 +1,15 @@
-package es.pratica.adocoes.servicos;
+package es.pratica.adocoes.repositorios;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+
+import java.util.Optional;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -16,31 +17,28 @@ import org.springframework.test.context.ActiveProfiles;
 import es.pratica.adocoes.adaptadores.persistencia.entidades.OngEntity;
 import es.pratica.adocoes.adaptadores.persistencia.interfacesdb.OngRepoInterface;
 import es.pratica.adocoes.adaptadores.persistencia.interfacesdb.TutorRepoInterface;
-import es.pratica.adocoes.dominio.interfacerepositorios.OngRepository;
+import es.pratica.adocoes.dominio.interfacerepositorios.TutorRepository;
 import es.pratica.adocoes.dominio.modelos.AddressModel;
 import es.pratica.adocoes.dominio.modelos.OngModel;
 import es.pratica.adocoes.dominio.modelos.TutorModel;
-import es.pratica.adocoes.dominio.servicos.interfaceservice.TutorServiceInterface;
 
-@SpringBootTest
 @ActiveProfiles("test")
-@TestInstance(Lifecycle.PER_CLASS)
-public class TutorServiceTests {
+@SpringBootTest
+public class TutorRepositoryTest {
+    @Autowired
+    private TutorRepository tutorRepository;
 
     @Autowired
-    private TutorServiceInterface tutorServiceInterface;
-
-    @Autowired
-    private TutorRepoInterface tutorRepoInterface;
-
+    private TutorRepoInterface tutorRepoMongo;
+    
     @Autowired
     private OngRepoInterface ongRepoMongo;
 
     private OngModel ongModel;
-    
+
     @AfterEach
     public void cleanDb(){
-        this.tutorRepoInterface.deleteAll();
+        this.tutorRepoMongo.deleteAll();
         this.ongRepoMongo.deleteAll();
     }
 
@@ -53,34 +51,27 @@ public class TutorServiceTests {
     }
 
     @Test
-    public void shouldAddTutor(){
-        TutorModel tutor = new TutorModel("60238940015", "Juninho", "Paulista", "juninho@gmail.com","51","981230034", "juninhoJogador", this.ongModel);
-        var response = this.tutorServiceInterface.createTutor(tutor);
-        assertNotNull(response);
+    public void addingTutorShouldChangeDbState(){
+        TutorModel tutorModel = new TutorModel("60130025022", "Alan Patrick", "Lourenço", 
+                                             "alanpa@gmail.com", "51", "920004567", "alanpa", this.ongModel);
+        this.tutorRepository.add(tutorModel);
+        assertNotEquals(0,this.tutorRepoMongo.count());
     }
 
-    
     @Test
-    public void shouldNotAddTutor(){
-        TutorModel tutor = new TutorModel("60238940015", "Juninho", "Paulista", "juninho@gmail.com","51","981230034", "juninhoJogador", this.ongModel);
-        this.tutorServiceInterface.createTutor(tutor);
-        var response = this.tutorServiceInterface.createTutor(tutor);
-        assertNull(response);
+    public void gettingByEmailShouldReturnNotNull(){
+        TutorModel tutorModel = new TutorModel("60130025022", "Alan Patrick", "Lourenço", 
+                                             "alanpa@gmail.com", "51", "920004567", "alanpa", this.ongModel);
+        this.tutorRepository.add(tutorModel);
+        assertNotNull(this.tutorRepository.getByEmail(tutorModel.getEmail()));
     }
-    
-    
+
     @Test
-    public void shouldReturnTutor(){
-        TutorModel tutor = new TutorModel("60238940015", "Juninho", "Paulista", "juninho@gmail.com","51","981230034", "juninhoJogador", this.ongModel);
-        this.tutorServiceInterface.createTutor(tutor);
-        var response = this.tutorServiceInterface.getByEmail(tutor.getEmail());
-        tutor.setId(response.get().getId());
-        assertEquals(tutor, response.get());
+    public void gettingByEmailShouldReturnNull(){
+        TutorModel tutorModel = new TutorModel("60130025022", "Alan Patrick", "Lourenço", 
+                                             "alanpa@gmail.com", "51", "920004567", "alanpa", this.ongModel);
+        assertEquals(Optional.empty(),this.tutorRepository.getByEmail(tutorModel.getEmail()));
     }
 
 
 }
-
-
-
-

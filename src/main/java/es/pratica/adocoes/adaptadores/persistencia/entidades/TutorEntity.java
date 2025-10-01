@@ -1,6 +1,7 @@
 package es.pratica.adocoes.adaptadores.persistencia.entidades;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -23,14 +24,15 @@ public class TutorEntity {
     private String id;
     @NonNull
     @Pattern(regexp = "[0-9]{11}")
+    @Indexed(unique = true)
     private String cpf;
     @NonNull
     @Size(min=1, max=50)
-    @Pattern(regexp = "[a-zA-ZÀ-ÿ\\\\- ]+")
+    @Pattern(regexp = "[a-zA-ZÀ-ÿ\\- ]+")
     private String firstName;
     @NonNull
     @Size(min=1, max=50)
-    @Pattern(regexp = "[a-zA-ZÀ-ÿ\\\\- ]+")
+    @Pattern(regexp = "[a-zA-ZÀ-ÿ\\- ]+")
     private String lastName;
     @NonNull
     @Email
@@ -39,7 +41,7 @@ public class TutorEntity {
     @NonNull
     private String ddd;
     @NonNull
-    @Pattern(regexp = "[0-9]{9}")
+    @Pattern(regexp = "9\\d{8}")
     private String phone;
     private String senha;
     @DBRef

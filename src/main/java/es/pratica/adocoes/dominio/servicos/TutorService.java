@@ -35,7 +35,7 @@ public class TutorService implements TutorServiceInterface {
 
     @Override
     public Optional<TutorModel> getByEmail(String email) {
-        return this.getByEmail(email);
+        return this.tutorRepository.getByEmail(email);
     }
     
 }
