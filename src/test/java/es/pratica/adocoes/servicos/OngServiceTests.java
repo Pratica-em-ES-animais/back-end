@@ -3,25 +3,20 @@ package es.pratica.adocoes.servicos;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import java.util.Optional;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-
 import es.pratica.adocoes.adaptadores.persistencia.interfacesdb.OngRepoInterface;
 import es.pratica.adocoes.dominio.modelos.AddressModel;
 import es.pratica.adocoes.dominio.modelos.OngModel;
 import es.pratica.adocoes.dominio.servicos.interfaceservice.OngServiceInterface;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 
 @SpringBootTest
 @ActiveProfiles("test")
-@TestInstance(Lifecycle.PER_CLASS)
 public class OngServiceTests {
     
     @Autowired

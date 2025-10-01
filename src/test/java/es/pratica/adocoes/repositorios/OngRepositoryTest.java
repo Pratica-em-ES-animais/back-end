@@ -8,12 +8,9 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-
 import es.pratica.adocoes.adaptadores.persistencia.interfacesdb.OngRepoInterface;
 import es.pratica.adocoes.dominio.interfacerepositorios.OngRepository;
 import es.pratica.adocoes.dominio.modelos.AddressModel;
@@ -21,7 +18,6 @@ import es.pratica.adocoes.dominio.modelos.OngModel;
 
 @ActiveProfiles("test")
 @SpringBootTest
-@TestInstance(Lifecycle.PER_CLASS)
 public class OngRepositoryTest {
     
     @Autowired
@@ -29,6 +25,7 @@ public class OngRepositoryTest {
 
     @Autowired
     private OngRepoInterface ongRepoMongo;
+
     
     @AfterEach
     public void cleanDb(){
@@ -44,7 +41,7 @@ public class OngRepositoryTest {
 
         assertNotEquals(0,this.ongRepoMongo.count());
     }
-    
+ 
     @Test
     public void addingAndGettingShouldReturnOng(){
         AddressModel addressModel = new AddressModel("90400000", "RS", "Porto Alegre", "Menino Deus",

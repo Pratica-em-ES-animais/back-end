@@ -8,6 +8,7 @@ import es.pratica.adocoes.dominio.modelos.OngModel;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,7 +25,7 @@ public class OngEntity {
     @Indexed(unique = true)
     private String cnpj;
     @NonNull
-    @Max(50)
+    @Size(min=1, max=60)
     @Pattern(regexp = "[a-zA-ZÀ-ÿ\\- ]+")
     private String name;
     @NonNull
@@ -34,7 +35,7 @@ public class OngEntity {
     @Pattern(regexp = "[0-9]{2}")
     private String ddd;
     @NonNull
-    @Pattern(regexp = "[0-9]{9}")
+    @Pattern(regexp = "9\\d{8}")
     private String phone;
     @NonNull
     private AddressEntity addresEntity;

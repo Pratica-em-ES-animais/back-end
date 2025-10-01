@@ -30,13 +30,11 @@ public class AddressEntity {
     @Pattern(regexp = "[a-zA-ZÀ-ÿ\\- ]+")
     @Size(min = 1 , max = 50)
     private String bairro;
-    @Pattern(regexp = "[a-zA-ZÀ-ÿ\\- ]+")
     private String complemento;
-    @Pattern(regexp = "[a-zA-ZÀ-ÿ\\- ]+")
+    @Pattern(regexp = "[0-9]+")
     private String numero;
     @NonNull
-    @Pattern(regexp = "[a-zA-ZÀ-ÿ\\- ]+")
-    @Size(min = 1 , max = 50)
+    @Size(min = 1 , max = 100)
     private String logradouro;
 
 
