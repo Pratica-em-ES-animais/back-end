@@ -11,12 +11,15 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @Data
+@NoArgsConstructor
 public class TutorCreateDto {
     @NonNull
     @Indexed(unique = true)
+    @Pattern(regexp = "[0-9]{11}")
     private String cpf;
     @NonNull
     @Size(min=1, max=50)

@@ -3,17 +3,13 @@ package es.pratica.adocoes.repositorios;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
 import java.util.Optional;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-
 import es.pratica.adocoes.adaptadores.persistencia.entidades.OngEntity;
 import es.pratica.adocoes.adaptadores.persistencia.interfacesdb.OngRepoInterface;
 import es.pratica.adocoes.adaptadores.persistencia.interfacesdb.TutorRepoInterface;

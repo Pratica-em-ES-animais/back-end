@@ -1,9 +1,7 @@
 package es.pratica.adocoes.servicos;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,11 +10,9 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-
 import es.pratica.adocoes.adaptadores.persistencia.entidades.OngEntity;
 import es.pratica.adocoes.adaptadores.persistencia.interfacesdb.OngRepoInterface;
 import es.pratica.adocoes.adaptadores.persistencia.interfacesdb.TutorRepoInterface;
-import es.pratica.adocoes.dominio.interfacerepositorios.OngRepository;
 import es.pratica.adocoes.dominio.modelos.AddressModel;
 import es.pratica.adocoes.dominio.modelos.OngModel;
 import es.pratica.adocoes.dominio.modelos.TutorModel;
