@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import es.pratica.adocoes.aplicacao.casosdeuso.CreateUserUC;
 import es.pratica.adocoes.aplicacao.dtos.UserDto;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -19,7 +20,7 @@ public class UserController {
 
     @PostMapping("/create")
     @CrossOrigin("*")
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto us){
+    public ResponseEntity<UserDto> createUser(@RequestBody @Valid UserDto us){
         if(this.createUserUC.run(us) == null){
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }

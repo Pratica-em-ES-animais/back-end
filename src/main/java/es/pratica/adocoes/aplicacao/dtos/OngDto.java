@@ -1,19 +1,39 @@
 package es.pratica.adocoes.aplicacao.dtos;
 
 
+import org.springframework.data.mongodb.core.index.Indexed;
+
+import com.mongodb.lang.NonNull;
+
 import es.pratica.adocoes.dominio.modelos.OngModel;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @AllArgsConstructor
 @Data
 public class OngDto {
-    private String id;
+     private String id;
+    @NonNull
+    @Pattern(regexp = "[0-9]{11}")
+    @Indexed(unique = true)
     private String cnpj;
+    @NonNull
+    @Size(min=1, max=60)
+    @Pattern(regexp = "[a-zA-ZÀ-ÿ\\- ]+")
     private String name;
+    @NonNull
+    @Email
     private String email;
+    @NonNull
+    @Pattern(regexp = "[0-9]{2}")
     private String ddd;
+    @NonNull
+    @Pattern(regexp = "9\\d{8}")
     private String phone;
+    @NonNull
     private AddressDto addressDto;
 
     public OngDto(String cnpj, String name, String email, String ddd, String phone, AddressDto addressDto) {
