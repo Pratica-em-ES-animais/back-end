@@ -1,5 +1,7 @@
 package es.pratica.adocoes.adaptadores.persistencia.entidades;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -18,30 +20,13 @@ import lombok.Data;
 public class AnimalEntity {
     @Id
     private String id;
-
-    @NonNull
-    @Max(50)
-    @NotBlank
     private String name;
-
-    @NonNull
-    @Max(30)
-    @NotBlank
     private String species;
-
-    @Max(50)
     private String breed;
-
     private Integer age;
-
-    @Pattern(regexp = "M|F|Outro")
     private String sex;
-
-    @Max(255)
     private String description;
-
-    // Relação com Tutor (pode ser null se ainda não tiver)
-    private String tutorId;
+    private List<String> tutorIds;
 
     // Conversão Model -> Entity
     public static AnimalEntity fromModel(AnimalModel model){
@@ -53,7 +38,7 @@ public class AnimalEntity {
             model.getAge(),
             model.getSex(),
             model.getDescription(),
-            model.getTutorId()
+            model.getTutorIds()
         );
     }
 

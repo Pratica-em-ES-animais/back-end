@@ -1,6 +1,13 @@
 package es.pratica.adocoes.aplicacao.dtos;
 
+import java.util.List;
+
+import com.mongodb.lang.NonNull;
+
 import es.pratica.adocoes.dominio.modelos.AnimalModel;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -8,24 +15,41 @@ import lombok.Data;
 @AllArgsConstructor
 public class AnimalDto {
     private String id;
+
+    @NonNull
+    @NotBlank
     private String name;
+
+    @NonNull
+    @Max(30)
+    @NotBlank
     private String species;
+
+    @Max(50)
     private String breed;
+
     private Integer age;
+
+    @Pattern(regexp = "M|F|Outro")
     private String sex;
+
+    @Max(255)
     private String description;
-    private String tutorId;
+
+    // Relação com Tutor (pode ser null se ainda não tiver)
+    private List<String> tutorIds;
+
 
     public AnimalDto(){}
 
-    public AnimalDto(String name, String species, String breed, Integer age, String sex, String description, String tutorId) {
+    public AnimalDto(String name, String species, String breed, Integer age, String sex, String description, List<String> tutorIds) {
         this.name = name;
         this.species = species;
         this.breed = breed;
         this.age = age;
         this.sex = sex;
         this.description = description;
-        this.tutorId = tutorId;
+        this.tutorIds = tutorIds;
     }
 
     // retrieving an animal
@@ -38,7 +62,7 @@ public class AnimalDto {
             model.getAge(),
             model.getSex(),
             model.getDescription(),
-            model.getTutorId()
+            model.getTutorIds()
         );
     }
 
@@ -51,7 +75,7 @@ public class AnimalDto {
             dto.getAge(),
             dto.getSex(),
             dto.getDescription(),
-            dto.getTutorId()
+            dto.getTutorIds()
         );
     }
 }

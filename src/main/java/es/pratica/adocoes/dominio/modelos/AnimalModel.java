@@ -1,5 +1,7 @@
 package es.pratica.adocoes.dominio.modelos;
 
+import java.util.List;
+
 import es.pratica.adocoes.adaptadores.persistencia.entidades.AnimalEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,17 +18,17 @@ public class AnimalModel {
     private Integer age;
     private String sex;
     private String description;
-    private String tutorId;
+    private List<String> tutorIds;
 
     // Construtor sem id (usado antes de persistir)
-    public AnimalModel(String name, String species, String breed, Integer age, String sex, String description, String tutorId){
+    public AnimalModel(String name, String species, String breed, Integer age, String sex, String description, List<String> tutorIds){
         this.name = name;
         this.species = species;
         this.breed = breed;
         this.age = age;
         this.sex = sex;
         this.description = description;
-        this.tutorId = tutorId;
+        this.tutorIds = tutorIds;
     }
 
     // Conversão de Entity -> Model (mesmo padrão do UserModel)
@@ -40,7 +42,7 @@ public class AnimalModel {
             ae.getAge(),
             ae.getSex(),
             ae.getDescription(),
-            ae.getTutorId()
+            ae.getTutorIds()
         );
     }
 }
