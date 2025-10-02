@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import es.pratica.adocoes.aplicacao.casosdeuso.CreateAnimalUC;
 import es.pratica.adocoes.aplicacao.dtos.AnimalDto;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -20,7 +21,7 @@ public class AnimalController {
 
     @PostMapping("/create")
     @CrossOrigin("*")
-    public ResponseEntity<AnimalDto> createAnimal(@RequestBody() AnimalDto animalDto){
+    public ResponseEntity<AnimalDto> createAnimal(@RequestBody @Valid AnimalDto animalDto){
         if(this.createAnimalUC.run(animalDto) == null){
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
