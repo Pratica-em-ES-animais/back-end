@@ -66,8 +66,8 @@ public class AnimalDto {
             model.getAge(),
             model.getSex(),
             model.getDescription(),
-            model.getTutorIds(),
-            StatusPetDto.valueOf(model.getStatus().name())
+            StatusPetDto.valueOf(model.getStatus().name()),
+            model.getTutorIds()
         );
     }
 
