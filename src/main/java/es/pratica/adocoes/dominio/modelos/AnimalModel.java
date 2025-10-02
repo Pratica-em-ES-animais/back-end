@@ -1,24 +1,19 @@
-package es.pratica.adocoes.adaptadores.persistencia.entidades;
+package es.pratica.adocoes.dominio.modelos;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import es.pratica.adocoes.dominio.modelos.AnimalModel;
+import es.pratica.adocoes.adaptadores.persistencia.entidades.AnimalEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Document
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class AnimalEntity {
-    @Id
+@NoArgsConstructor
+public class AnimalModel {
     private String id;
-    private StatusPetEntity statusPet;
+    private StatusPetModel statusPet;
     private String nome;
     private int idade;
     private String caracteristicas;
-    //requer necessidades especiais
     private boolean necessidadesEspeciais;
     private boolean tratamentoContinuo;
     private boolean doencaCronica;
@@ -26,12 +21,13 @@ public class AnimalEntity {
     private boolean seDaBemComAnimais;
     private boolean cuidadosConstantes;
 
-    public AnimalEntity(StatusPetEntity statusPet, String nome, int idade, boolean necessidadesEspeciais,
+    public AnimalModel(StatusPetModel statusPet, String nome, int idade, String caracteristicas,boolean necessidadesEspeciais,
             boolean tratamentoContinuo, boolean doencaCronica, boolean doencaIncuravel, boolean seDaBemComAnimais,
             boolean cuidadosConstantes) {
         this.statusPet = statusPet;
         this.nome = nome;
         this.idade = idade;
+        this.caracteristicas = caracteristicas;
         this.necessidadesEspeciais = necessidadesEspeciais;
         this.tratamentoContinuo = tratamentoContinuo;
         this.doencaCronica = doencaCronica;
@@ -40,10 +36,12 @@ public class AnimalEntity {
         this.cuidadosConstantes = cuidadosConstantes;
     }
 
-    public static AnimalEntity fromModel(AnimalModel animalModel) {
-        return new AnimalEntity(StatusPetEntity.valueOf(animalModel.getStatusPet().name()), animalModel.getNome(), animalModel.getIdade(),
-                                animalModel.isNecessidadesEspeciais(), animalModel.isTratamentoContinuo(), 
-                                animalModel.isDoencaCronica(), animalModel.isDoencaIncuravel(), animalModel.isSeDaBemComAnimais(),
-                                animalModel.isCuidadosConstantes());
+    public static AnimalModel toModel(AnimalEntity animalEntity){
+        return new AnimalModel(animalEntity.getId(), StatusPetModel.valueOf(animalEntity.getStatusPet().name()), animalEntity.getNome(),
+                               animalEntity.getIdade(), animalEntity.getCaracteristicas(),animalEntity.isNecessidadesEspeciais(),
+                               animalEntity.isTratamentoContinuo(),animalEntity.isDoencaCronica(),animalEntity.isDoencaIncuravel(),
+                               animalEntity.isSeDaBemComAnimais(),animalEntity.isCuidadosConstantes());        
     }
+
+
 }
