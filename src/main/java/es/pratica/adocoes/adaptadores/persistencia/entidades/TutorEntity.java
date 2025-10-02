@@ -22,26 +22,11 @@ import lombok.NoArgsConstructor;
 public class TutorEntity {
     @Id
     private String id;
-    @NonNull
-    @Pattern(regexp = "[0-9]{11}")
-    @Indexed(unique = true)
     private String cpf;
-    @NonNull
-    @Size(min=1, max=50)
-    @Pattern(regexp = "[a-zA-ZÀ-ÿ\\- ]+")
     private String firstName;
-    @NonNull
-    @Size(min=1, max=50)
-    @Pattern(regexp = "[a-zA-ZÀ-ÿ\\- ]+")
     private String lastName;
-    @NonNull
-    @Email
     private String email;
-    @Pattern(regexp = "[0-9]{2}")
-    @NonNull
     private String ddd;
-    @NonNull
-    @Pattern(regexp = "9\\d{8}")
     private String phone;
     private String senha;
     @DBRef

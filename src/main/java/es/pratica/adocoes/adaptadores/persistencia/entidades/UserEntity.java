@@ -21,28 +21,13 @@ import lombok.NoArgsConstructor;
 public class UserEntity {
     @Id
     private String id;
-    @NonNull
-    @Pattern(regexp = "[0-9]{11}")
     private String cpf;
-    @NonNull
-    @Size(min = 1 , max = 50)
-    @Pattern(regexp = "[a-zA-ZÀ-ÿ\\\\- ]+")
     private String firstName;
-    @NonNull
-    @Max(50)
-    @Pattern(regexp = "[a-zA-ZÀ-ÿ\\\\- ]+")
     private String lastName;
-    @NonNull
-    @Email
     private String email; 
-    @Pattern(regexp = "[0-9]{2}")
-    @NonNull
     private String ddd;
-    @NonNull
-    @Pattern(regexp = "[0-9]{9}")
     private String phone;
     private String senha;
-
 
     public static UserEntity fromModel(UserModel model){
         return new UserEntity(model.getId(), model.getCpf(), model.getFirstName(), 
