@@ -1,9 +1,6 @@
 package es.pratica.adocoes.adaptadores.persistencia.entidades;
 
-import com.mongodb.lang.NonNull;
 import es.pratica.adocoes.dominio.modelos.AddressModel;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
