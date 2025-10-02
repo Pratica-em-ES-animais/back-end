@@ -19,9 +19,10 @@ public class AnimalModel {
     private String sex;
     private String description;
     private List<String> tutorIds;
+    private StatusPetModel status;
 
     // Construtor sem id (usado antes de persistir)
-    public AnimalModel(String name, String species, String breed, Integer age, String sex, String description, List<String> tutorIds){
+    public AnimalModel(String name, String species, String breed, Integer age, String sex, String description, List<String> tutorIds, StatusPetModel status) {
         this.name = name;
         this.species = species;
         this.breed = breed;
@@ -29,6 +30,7 @@ public class AnimalModel {
         this.sex = sex;
         this.description = description;
         this.tutorIds = tutorIds;
+        this.status = status;
     }
 
     // Conversão de Entity -> Model (mesmo padrão do UserModel)
@@ -42,7 +44,8 @@ public class AnimalModel {
             ae.getAge(),
             ae.getSex(),
             ae.getDescription(),
-            ae.getTutorIds()
+            ae.getTutorIds(),
+            StatusPetModel.valueOf(ae.getStatusPet().name())
         );
     }
 }

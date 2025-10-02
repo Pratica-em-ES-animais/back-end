@@ -5,6 +5,7 @@ import java.util.List;
 import com.mongodb.lang.NonNull;
 
 import es.pratica.adocoes.dominio.modelos.AnimalModel;
+import es.pratica.adocoes.dominio.modelos.StatusPetModel;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -30,11 +31,13 @@ public class AnimalDto {
 
     private Integer age;
 
-    @Pattern(regexp = "M|F|Outro")
+    @Pattern(regexp = "M|F")
     private String sex;
 
     @Max(255)
     private String description;
+
+    private StatusPetDto status;
 
     // Relação com Tutor (pode ser null se ainda não tiver)
     private List<String> tutorIds;
@@ -42,7 +45,7 @@ public class AnimalDto {
 
     public AnimalDto(){}
 
-    public AnimalDto(String name, String species, String breed, Integer age, String sex, String description, List<String> tutorIds) {
+    public AnimalDto(String name, String species, String breed, Integer age, String sex, String description, List<String> tutorIds, StatusPetDto status){
         this.name = name;
         this.species = species;
         this.breed = breed;
@@ -50,6 +53,7 @@ public class AnimalDto {
         this.sex = sex;
         this.description = description;
         this.tutorIds = tutorIds;
+        this.status = status;
     }
 
     // retrieving an animal
@@ -62,7 +66,8 @@ public class AnimalDto {
             model.getAge(),
             model.getSex(),
             model.getDescription(),
-            model.getTutorIds()
+            model.getTutorIds(),
+            StatusPetDto.valueOf(model.getStatus().name())
         );
     }
 
@@ -75,7 +80,8 @@ public class AnimalDto {
             dto.getAge(),
             dto.getSex(),
             dto.getDescription(),
-            dto.getTutorIds()
+            dto.getTutorIds(),
+            StatusPetModel.valueOf(dto.getStatus().name())
         );
     }
 }

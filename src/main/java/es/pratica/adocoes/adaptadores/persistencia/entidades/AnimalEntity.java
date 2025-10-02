@@ -27,6 +27,7 @@ public class AnimalEntity {
     private String sex;
     private String description;
     private List<String> tutorIds;
+    private StatusPetEntity statusPet;
 
     // Conversão Model -> Entity
     public static AnimalEntity fromModel(AnimalModel model){
@@ -39,6 +40,7 @@ public class AnimalEntity {
             model.getSex(),
             model.getDescription(),
             model.getTutorIds()
+            model.valueOf(model.getStatusPet().name())
         );
     }
 
