@@ -97,7 +97,7 @@ public class OngEntityTest {
         assertTrue(violation.isEmpty());
     }
 
-     @Test
+    @Test
     public void invalidEmailShouldNotAllow(){
         OngEntity ongEntity = new OngEntity();
         ongEntity.setEmail("Joao");

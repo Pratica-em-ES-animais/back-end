@@ -1,5 +1,7 @@
 package es.pratica.adocoes.dominio.modelos;
 
+
+import es.pratica.adocoes.adaptadores.persistencia.entidades.TutorEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -26,6 +28,11 @@ public class TutorModel {
         this.phone = phone;
         this.senha = senha;
         this.ongModel = ongModel;
+    }
+
+    public static TutorModel toModel(TutorEntity entity) {
+        return new TutorModel(entity.getId(), entity.getCpf(), entity.getFirstName(), entity.getLastName(),
+                    entity.getEmail(), entity.getDdd(), entity.getPhone(), entity.getSenha(), OngModel.toModel(entity.getOngEntity()));
     }
 
 

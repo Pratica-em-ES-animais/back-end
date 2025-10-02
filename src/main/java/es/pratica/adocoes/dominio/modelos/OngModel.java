@@ -3,9 +3,11 @@ package es.pratica.adocoes.dominio.modelos;
 import es.pratica.adocoes.adaptadores.persistencia.entidades.OngEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @Data
+@NoArgsConstructor
 public class OngModel {
     private String id;
     private String cnpj;
