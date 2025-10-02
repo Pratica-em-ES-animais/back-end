@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import es.pratica.adocoes.aplicacao.casosdeuso.CreateOngUC;
 import es.pratica.adocoes.aplicacao.dtos.OngDto;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -19,7 +20,7 @@ public class OngController {
 
     @PostMapping("/create")
     @CrossOrigin("*")
-    public ResponseEntity<OngDto> createOng(@RequestBody OngDto dto){
+    public ResponseEntity<OngDto> createOng(@RequestBody @Valid OngDto dto){
         if(this.createOngUC.createOng(dto) == null){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
