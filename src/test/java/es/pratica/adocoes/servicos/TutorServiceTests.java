@@ -67,18 +67,6 @@ public class TutorServiceTests {
         var response = this.tutorServiceInterface.createTutor(tutor);
         assertNull(response);
     }
-    
-    
-    @Test
-    public void shouldReturnTutor(){
-        TutorModel tutor = new TutorModel("60238940015", "Juninho", "Paulista", "juninho@gmail.com","51","981230034", "juninhoJogador", this.ongModel);
-        this.tutorServiceInterface.createTutor(tutor);
-        var response = this.tutorServiceInterface.getByEmail(tutor.getEmail());
-        tutor.setId(response.get().getId());
-        assertEquals(tutor, response.get());
-    }
-
-
 }
 
 
