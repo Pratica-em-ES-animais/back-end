@@ -1,40 +1,43 @@
 package es.pratica.adocoes.aplicacao.dtos;
 
 import java.util.List;
-
-import com.mongodb.lang.NonNull;
-
 import es.pratica.adocoes.dominio.modelos.AnimalModel;
 import es.pratica.adocoes.dominio.modelos.StatusPetModel;
+import jakarta.annotation.Nonnull;
 import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class AnimalDto {
     private String id;
 
-    @NonNull
-    @NotBlank
+    @Nonnull
+    @Pattern(regexp = "[a-zA-ZÀ-ÿ\\- ]+")
+    @Size(min=1, max=60)
     private String name;
 
-    @NonNull
-    @Max(30)
-    @NotBlank
+    @Nonnull
+    @Size(min=1, max=30)
     private String species;
 
-    @Max(50)
+    @Size(min=1, max=50)
     private String breed;
 
-    private Integer age;
+    @Max(value = 23)
+    @Min(value = 0)
+    private int age;
 
     @Pattern(regexp = "M|F")
     private String sex;
 
-    @Max(255)
+    @Size(max= 255)
     private String description;
 
     private StatusPetDto status;
@@ -42,10 +45,7 @@ public class AnimalDto {
     // Relação com Tutor (pode ser null se ainda não tiver)
     private List<String> tutorIds;
 
-
-    public AnimalDto(){}
-
-    public AnimalDto(String name, String species, String breed, Integer age, String sex, String description, List<String> tutorIds, StatusPetDto status){
+    public AnimalDto(String name, String species, String breed, int age, String sex, String description, List<String> tutorIds, StatusPetDto status){
         this.name = name;
         this.species = species;
         this.breed = breed;

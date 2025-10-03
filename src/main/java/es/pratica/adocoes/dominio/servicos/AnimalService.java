@@ -1,5 +1,6 @@
 package es.pratica.adocoes.dominio.servicos;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -32,5 +33,10 @@ public class AnimalService implements AnimalServiceInterface {
     @Override
     public Optional<AnimalModel> getByName(String name) {
         return this.animalRepositorio.getByName(name);
+    }
+
+    @Override
+    public List<AnimalModel> getAll() {
+        return this.animalRepositorio.getAll();
     }
 }

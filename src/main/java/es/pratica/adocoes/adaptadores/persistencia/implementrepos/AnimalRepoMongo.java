@@ -1,5 +1,6 @@
 package es.pratica.adocoes.adaptadores.persistencia.implementrepos;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
@@ -36,5 +37,10 @@ public class AnimalRepoMongo implements AnimalRepository {
     public Optional<AnimalModel> getByName(String name) {
         var response = this.animalRepo.findByName(name);
         return response.map(AnimalModel::toModel);
+    }
+
+    @Override
+    public List<AnimalModel> getAll() {
+        return this.animalRepo.findAll().stream().map(AnimalModel::toModel).toList();
     }
 }

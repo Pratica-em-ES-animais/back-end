@@ -1,16 +1,9 @@
 package es.pratica.adocoes.adaptadores.persistencia.entidades;
 
 import java.util.List;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import com.mongodb.lang.NonNull;
-
 import es.pratica.adocoes.dominio.modelos.AnimalModel;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -29,7 +22,21 @@ public class AnimalEntity {
     private List<String> tutorIds;
     private StatusPetEntity statusPet;
 
+    
+
     // Conversão Model -> Entity
+    public AnimalEntity(String name, String species, String breed, Integer age, String sex, String description,
+            List<String> tutorIds, StatusPetEntity statusPet) {
+        this.name = name;
+        this.species = species;
+        this.breed = breed;
+        this.age = age;
+        this.sex = sex;
+        this.description = description;
+        this.tutorIds = tutorIds;
+        this.statusPet = statusPet;
+    }
+
     public static AnimalEntity fromModel(AnimalModel model){
         return new AnimalEntity(
             model.getId(),
@@ -39,8 +46,8 @@ public class AnimalEntity {
             model.getAge(),
             model.getSex(),
             model.getDescription(),
-            model.getTutorIds()
-            model.valueOf(model.getStatusPet().name())
+            model.getTutorIds(),
+            StatusPetEntity.valueOf(model.getStatus().name())
         );
     }
 

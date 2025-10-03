@@ -1,8 +1,7 @@
 package es.pratica.adocoes.aplicacao.dtos;
 
-import com.mongodb.lang.NonNull;
-
 import es.pratica.adocoes.dominio.modelos.AddressModel;
+import jakarta.annotation.Nonnull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -13,24 +12,24 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddressDto {
-    @NonNull
+    @Nonnull
     @Pattern(regexp = "[0-9]{8}")
     private String cep;
-    @NonNull
+    @Nonnull
     @Pattern(regexp = "[A-Z]{2}")
     private String uf;
-    @NonNull
+    @Nonnull
     @Pattern(regexp = "[a-zA-ZÀ-ÿ\\- ]+")
     @Size(min = 1 , max = 50)
     private String cidade;
-    @NonNull
+    @Nonnull
     @Pattern(regexp = "[a-zA-ZÀ-ÿ\\- ]+")
     @Size(min = 1 , max = 50)
     private String bairro;
     private String complemento;
     @Pattern(regexp = "[0-9]+")
     private String numero;
-    @NonNull
+    @Nonnull
     @Size(min = 1 , max = 100)
     private String logradouro;
 
