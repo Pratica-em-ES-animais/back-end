@@ -26,4 +26,5 @@ public class UserController {
         }
         return new ResponseEntity<>(us,HttpStatus.CREATED);
     }
+
 }

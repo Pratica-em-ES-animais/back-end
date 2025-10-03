@@ -22,11 +22,13 @@ public class SpringSecurityConfig {
                                                         "/swagger-ui/**",
                                                         "/v3/api-docs/**",
                                                         "/api/tutor/create",
-                                                        "/")
+                                                        "/",
+                                                        "/auth/**")
                                                         .permitAll()
                                                         .anyRequest()
                                                         .permitAll());
         http.csrf(csrf -> csrf.disable());
+       // http.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
         http.formLogin(df -> df.disable()); 
         http.httpBasic(df -> Customizer.withDefaults());
         return http.build();

@@ -19,11 +19,11 @@ public class UserDto {
     private String cpf;
     @NonNull
     @Size(min = 1 , max = 50)
-    @Pattern(regexp = "[a-zA-ZÀ-ÿ\\\\- ]+")
+    @Pattern(regexp = "[a-zA-ZÀ-ÿ\\- ]+")
     private String firstName;
     @NonNull
-    @Max(50)
-    @Pattern(regexp = "[a-zA-ZÀ-ÿ\\\\- ]+")
+    @Size(min = 1 , max = 50)
+    @Pattern(regexp = "[a-zA-ZÀ-ÿ\\- ]+")
     private String lastName;
     @NonNull
     @Email
