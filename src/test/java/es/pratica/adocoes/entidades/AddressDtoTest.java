@@ -2,11 +2,8 @@ package es.pratica.adocoes.entidades;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.Set;
-
 import org.junit.jupiter.api.Test;
-
 import es.pratica.adocoes.aplicacao.dtos.AddressDto;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
