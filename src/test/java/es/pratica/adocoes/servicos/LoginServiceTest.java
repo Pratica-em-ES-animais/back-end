@@ -39,7 +39,7 @@ public class LoginServiceTest {
     }
 
     @Test
-    public void loginWithCorrectPasswordShouldReturnNull(){
+    public void loginWithCorrectPasswordShouldReturnNotNull(){
         var um = new UserModel("12345678910", "Ronaldinho", "Gaucho","ronaldinho@gmail.com", "51", "981230036", "interCampeaoDoMundo");
         userService.createUser(um);
         assertNotNull(this.loginUserUC.login(new UserLoginDto("ronaldinho@gmail.com", "interCampeaoDoMundo")));
