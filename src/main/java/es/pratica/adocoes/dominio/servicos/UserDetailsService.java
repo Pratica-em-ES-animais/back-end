@@ -19,7 +19,7 @@ public class UserDetailsService implements UserDetailsServiceInterface{
         UserModel user = this.userRepository.getByEmail(email).orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado."));
         return User.builder()
                    .username(user.getEmail())
-                   .username(user.getSenha())
+                   .password(user.getSenha())
                    .roles("USER")
                    .build();
         
