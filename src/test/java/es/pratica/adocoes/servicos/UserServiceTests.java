@@ -5,6 +5,9 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -14,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import es.pratica.adocoes.adaptadores.persistencia.interfacesdb.UserRepoInterface;
 import es.pratica.adocoes.dominio.modelos.UserModel;
 import es.pratica.adocoes.dominio.servicos.interfaceservice.UserServiceInterface;
 
@@ -23,12 +27,21 @@ import es.pratica.adocoes.dominio.servicos.interfaceservice.UserServiceInterface
 public class UserServiceTests {
     @Autowired
     private UserServiceInterface userService;
+
     private UserModel um;
+
+    @Autowired
+    private UserRepoInterface mongoRepo;
     
     @BeforeAll
     public void init(){
         MockitoAnnotations.openMocks(this);
         this.um = new UserModel("12345678910", "Ronaldinho", "Gaucho","ronaldinho@gmail.com", "51", "981230036", "interCampeaoDoMundo");
+    }
+
+    @AfterEach
+    public void setup(){
+        this.mongoRepo.deleteAll();
     }
     
     @Test
