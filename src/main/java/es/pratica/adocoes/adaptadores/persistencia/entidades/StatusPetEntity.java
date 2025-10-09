@@ -1,5 +1,5 @@
 package es.pratica.adocoes.adaptadores.persistencia.entidades;
 
 public enum StatusPetEntity {
-    DISPONIVEL, ADOTADO, PERDIDO, FALECIDO 
+    AVAILABLE, PENDING ,ADOPTED, LOST, DECEASED
 }

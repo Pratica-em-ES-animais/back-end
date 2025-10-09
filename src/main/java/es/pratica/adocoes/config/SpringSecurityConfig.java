@@ -19,6 +19,7 @@ public class SpringSecurityConfig {
         http.authorizeHttpRequests(requests -> requests.
                                                         requestMatchers(
                                             "/api/user/create",
+                                                        "/api/adoption/create",
                                                         "/swagger-ui/**",
                                                         "/v3/api-docs/**",
                                                         "/api/tutor/create",
