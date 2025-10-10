@@ -4,7 +4,6 @@ import com.mongodb.lang.NonNull;
 
 import es.pratica.adocoes.dominio.modelos.UserModel;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;

@@ -1,13 +1,14 @@
 package es.pratica.adocoes.servicos;
 
+import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+
 import es.pratica.adocoes.adaptadores.persistencia.interfacesdb.AnimalRepoInterface;
 import es.pratica.adocoes.dominio.modelos.AnimalModel;
 import es.pratica.adocoes.dominio.modelos.StatusPetModel;
@@ -30,7 +31,7 @@ public class AnimalServiceTest {
 
     @Test
     public void shouldAdd(){
-        AnimalModel animal = new AnimalModel("Alemão", "Cachorro", "SRD", 7, "M","é um cachorro fofo demais", null, StatusPetModel.DISPONIVEL);
+        AnimalModel animal = new AnimalModel("Alemão", "Cachorro", "SRD", 7, "M","é um cachorro fofo demais", null, StatusPetModel.AVAILABLE);
         var response = this.animalService.createAnimal(animal);
         animal.setId(response.getId());
         assertEquals(animal, response);
@@ -43,7 +44,7 @@ public class AnimalServiceTest {
 
     @Test
     public void getAllShouldReturnNonEmpty(){
-        AnimalModel animal = new AnimalModel("Alemão", "Cachorro", "SRD", 7, "M","é um cachorro fofo demais", null, StatusPetModel.DISPONIVEL);
+        AnimalModel animal = new AnimalModel("Alemão", "Cachorro", "SRD", 7, "M","é um cachorro fofo demais", null, StatusPetModel.AVAILABLE);
         this.animalService.createAnimal(animal);
         assertFalse(this.animalService.getAll().isEmpty());
     }
