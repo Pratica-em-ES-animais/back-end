@@ -11,7 +11,14 @@ import org.springframework.test.context.ActiveProfiles;
 
 import es.pratica.adocoes.adaptadores.persistencia.interfacesdb.AnimalRepoInterface;
 import es.pratica.adocoes.dominio.modelos.AnimalModel;
-import es.pratica.adocoes.dominio.modelos.StatusPetModel;
+import es.pratica.adocoes.dominio.enums.Breed;
+import es.pratica.adocoes.dominio.enums.Energy;
+import es.pratica.adocoes.dominio.enums.PetSize;
+import es.pratica.adocoes.dominio.enums.Sex;
+import es.pratica.adocoes.dominio.enums.Sociability;
+import es.pratica.adocoes.dominio.enums.Species;
+import es.pratica.adocoes.dominio.enums.StatusPet;
+import es.pratica.adocoes.dominio.enums.Temperament;
 import es.pratica.adocoes.dominio.servicos.interfaceservice.AnimalServiceInterface;
 
 @SpringBootTest
@@ -31,7 +38,25 @@ public class AnimalServiceTest {
 
     @Test
     public void shouldAdd(){
-        AnimalModel animal = new AnimalModel("Alemão", "Dog", "Mixed", 7, "M", "Medium", true, true, "Calm", "Low", "Sociable", "photo_base64_data_here", "Vaccinated in 2023. Regular checkups done.", "é um cachorro fofo demais", null, StatusPetModel.AVAILABLE);
+        AnimalModel animal = new AnimalModel(
+            "Alemao", // name
+            Species.Cachorro, // species
+            Breed.VIRA_LATA, // breed
+            Sex.M, // sex
+            7, // age
+            PetSize.Medio, // size
+            true, // neutered
+            true, // vaccinated
+            Temperament.Normal, // temperament
+            Energy.Baixa, // energy
+            Sociability.Sociavel, // sociability
+            "photo_base64_data_here", // photo
+            "Vaccinated in 2023. Regular checkups done.", // health_details
+            "é um cachorro fofo demais", // description
+            StatusPet.AVAILABLE, // status
+            null // tutorIds
+        );
+
         var response = this.animalService.createAnimal(animal);
         animal.setId(response.getId());
         assertEquals(animal, response);
@@ -44,7 +69,25 @@ public class AnimalServiceTest {
 
     @Test
     public void getAllShouldReturnNonEmpty(){
-        AnimalModel animal = new AnimalModel("Alemão", "Dog", "Mixed", 7, "M", "Medium", true, true, "Calm", "Low", "Sociable", "photo_base64_data_here", "Vaccinated in 2023. Regular checkups done.", "é um cachorro fofo demais", null, StatusPetModel.AVAILABLE);
+        AnimalModel animal = new AnimalModel(
+            "Alemao", // name
+            Species.Cachorro, // species
+            Breed.VIRA_LATA, // breed
+            Sex.M, // sex
+            7, // age
+            PetSize.Medio, // size
+            true, // neutered
+            true, // vaccinated
+            Temperament.Normal, // temperament
+            Energy.Baixa, // energy
+            Sociability.Sociavel, // sociability
+            "photo_base64_data_here", // photo
+            "Vaccinated in 2023. Regular checkups done.", // health_details
+            "é um cachorro fofo demais", // description
+            StatusPet.AVAILABLE, // status
+            null // tutorIds
+        );
+
         this.animalService.createAnimal(animal);
         assertFalse(this.animalService.getAll().isEmpty());
     }

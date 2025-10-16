@@ -1,8 +1,17 @@
 package es.pratica.adocoes.aplicacao.dtos;
 
 import java.util.List;
+
+import es.pratica.adocoes.dominio.enums.Species;
+import es.pratica.adocoes.dominio.enums.Breed;
+import es.pratica.adocoes.dominio.enums.Sex;
+import es.pratica.adocoes.dominio.enums.PetSize;
+import es.pratica.adocoes.dominio.enums.Temperament;
+import es.pratica.adocoes.dominio.enums.Energy;
+import es.pratica.adocoes.dominio.enums.Sociability;
+import es.pratica.adocoes.dominio.enums.StatusPet;
+
 import es.pratica.adocoes.dominio.modelos.AnimalModel;
-import es.pratica.adocoes.dominio.modelos.StatusPetModel;
 import jakarta.annotation.Nonnull;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -24,55 +33,53 @@ public class AnimalDto {
     private String name;
 
     @Nonnull
-    @Size(min=1, max=30)
-    private String species;
+    private Species species;
 
-    @Size(min=1, max=50)
-    private String breed;
+    @Nonnull
+    private Breed breed;
 
-    @Pattern(regexp = "M|F")
-    private String sex;
+    @Nonnull
+    private Sex sex;
 
+    @Max(value = 50)
     @Min(value = 0)
     private Integer age;
 
-    @Size(min=1, max=20)
-    private String size;
+    @Nonnull
+    private PetSize size;
 
+    @Nonnull
     private Boolean neutered;
 
+    @Nonnull
     private Boolean vaccinated;
 
-    @Size(max=50)
-    private String temperament;
+    private Temperament temperament;
 
-    @Size(max=20)
-    private String energy;
+    private Energy energy;
 
-    @Size(max=20)
-    private String sociability;
+    private Sociability sociability;
 
-    private String photo; // Can store Base64 encoded image or file path/URL
+    private String photo;
 
-    @Size(max= 1000) // Allow larger size for health history
-    private String health_details; // Pet's historical health content
+    @Size(max=1000)
+    private String health_details;
 
-    @Size(max= 255)
+    @Size(max=255)
     private String description;
 
-    private StatusPetDto status;
+    private StatusPet status;
 
-    // Relação com Tutor (pode ser null se ainda não tiver)
     private List<String> tutorIds;
 
-    public AnimalDto(String name, String species, String breed, Integer age, String sex, String size,
-                    Boolean neutered, Boolean vaccinated, String temperament, String energy, String sociability,
-                    String photo, String health_details, String description, List<String> tutorIds, StatusPetDto status){
+    public AnimalDto(String name, Species species, Breed breed, Sex sex, Integer age, PetSize size,
+                     Boolean neutered, Boolean vaccinated, Temperament temperament, Energy energy, Sociability sociability,
+                     String photo, String health_details, String description, StatusPet status, List<String> tutorIds){
         this.name = name;
         this.species = species;
         this.breed = breed;
-        this.age = age;
         this.sex = sex;
+        this.age = age;
         this.size = size;
         this.neutered = neutered;
         this.vaccinated = vaccinated;
@@ -82,18 +89,18 @@ public class AnimalDto {
         this.photo = photo;
         this.health_details = health_details;
         this.description = description;
-        this.tutorIds = tutorIds;
         this.status = status;
+        this.tutorIds = tutorIds;
     }
 
-    // retrieving an animal
     public static AnimalDto fromModel(AnimalModel model){
         return new AnimalDto(
+            model.getId(),
             model.getName(),
             model.getSpecies(),
             model.getBreed(),
-            model.getAge(),
             model.getSex(),
+            model.getAge(),
             model.getSize(),
             model.getNeutered(),
             model.getVaccinated(),
@@ -103,19 +110,18 @@ public class AnimalDto {
             model.getPhoto(),
             model.getHealth_details(),
             model.getDescription(),
-            model.getTutorIds(),
-            StatusPetDto.valueOf(model.getStatus().name())
+            model.getStatus(),
+            model.getTutorIds()
         );
     }
 
-    // creating an animal
-    public static AnimalModel toModel(AnimalDto dto){ 
+    public static AnimalModel toModel(AnimalDto dto){
         return new AnimalModel(
             dto.getName(),
             dto.getSpecies(),
             dto.getBreed(),
-            dto.getAge(),
             dto.getSex(),
+            dto.getAge(),
             dto.getSize(),
             dto.getNeutered(),
             dto.getVaccinated(),
@@ -125,8 +131,8 @@ public class AnimalDto {
             dto.getPhoto(),
             dto.getHealth_details(),
             dto.getDescription(),
-            dto.getTutorIds(),
-            StatusPetModel.valueOf(dto.getStatus().name())
+            dto.getStatus(),
+            dto.getTutorIds()
         );
     }
 }

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 import es.pratica.adocoes.aplicacao.dtos.AnimalDto;
+import es.pratica.adocoes.dominio.enums.Sex;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -34,7 +35,7 @@ public class AnimalDtoTest {
     @Test
     public void invalidSexShouldNotAllow(){
         AnimalDto animalDto = new AnimalDto();
-        animalDto.setSex("a");
+        animalDto.setSex(null);
         Set<ConstraintViolation<AnimalDto>> violation = this.validator.validate(animalDto);
         assertFalse(violation.isEmpty());
     }
@@ -42,7 +43,7 @@ public class AnimalDtoTest {
     @Test
     public void validSexShouldAllow(){
         AnimalDto animalDto = new AnimalDto();
-        animalDto.setSex("F");
+        animalDto.setSex(Sex.F);
         Set<ConstraintViolation<AnimalDto>> violation = this.validator.validate(animalDto);
         assertTrue(violation.isEmpty());
     }

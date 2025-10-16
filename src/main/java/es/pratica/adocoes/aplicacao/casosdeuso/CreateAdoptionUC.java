@@ -7,7 +7,7 @@ import es.pratica.adocoes.dominio.interfacerepositorios.AnimalRepository;
 import es.pratica.adocoes.dominio.interfacerepositorios.UserRepository;
 import es.pratica.adocoes.dominio.modelos.AdoptionModel;
 import es.pratica.adocoes.dominio.modelos.AnimalModel;
-import es.pratica.adocoes.dominio.modelos.StatusPetModel;
+import es.pratica.adocoes.dominio.enums.StatusPet;
 
 
 @Component
@@ -32,7 +32,7 @@ public class CreateAdoptionUC {
         if (!userRepository.getById(tutorId).isPresent()) {
             throw new IllegalArgumentException("Tutor com ID " + tutorId + " não encontrado.");
         }
-        if (!animal.getStatus().equals(StatusPetModel.AVAILABLE)) {
+        if (!animal.getStatus().equals(StatusPet.AVAILABLE)) {
             throw new IllegalStateException("Este animal não está disponível para adoção no momento.");
         }
     
@@ -42,7 +42,7 @@ public class CreateAdoptionUC {
             adopterId
         );
 
-        animal.setStatus(StatusPetModel.PENDING);
+        animal.setStatus(StatusPet.PENDING);
         animalRepository.add(animal); 
 
         return adoptionRepository.add(newAdoptionRequest);

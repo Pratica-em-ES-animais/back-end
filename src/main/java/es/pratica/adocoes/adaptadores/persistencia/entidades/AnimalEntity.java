@@ -3,44 +3,54 @@ package es.pratica.adocoes.adaptadores.persistencia.entidades;
 import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import es.pratica.adocoes.dominio.enums.Species;
+import es.pratica.adocoes.dominio.enums.Breed;
+import es.pratica.adocoes.dominio.enums.Sex;
+import es.pratica.adocoes.dominio.enums.PetSize;
+import es.pratica.adocoes.dominio.enums.Temperament;
+import es.pratica.adocoes.dominio.enums.Energy;
+import es.pratica.adocoes.dominio.enums.Sociability;
+import es.pratica.adocoes.dominio.enums.StatusPet;
+
 import es.pratica.adocoes.dominio.modelos.AnimalModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Document
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class AnimalEntity {
     @Id
     private String id;
     private String name;
-    private String species;
-    private String breed;
-    private String sex;
+    private Species species;
+    private Breed breed;
+    private Sex sex;
     private Integer age;
-    private String size;
+    private PetSize size;
     private Boolean neutered;
     private Boolean vaccinated;
-    private String temperament;
-    private String energy;
-    private String sociability;
+    private Temperament temperament;
+    private Energy energy;
+    private Sociability sociability;
     private String photo;
     private String health_details;
     private String description;
+    private StatusPet statusPet;
     private List<String> tutorIds;
-    private StatusPetEntity statusPet;
 
-    
-
-    // Conversão Model -> Entity
-    public AnimalEntity(String name, String species, String breed, Integer age, String sex, String size,
-            Boolean neutered, Boolean vaccinated, String temperament, String energy, String sociability,
-            String photo, String health_details, String description, List<String> tutorIds, StatusPetEntity statusPet) {
+    public AnimalEntity(String name, Species species, Breed breed, Sex sex, Integer age, PetSize size,
+                        Boolean neutered, Boolean vaccinated, Temperament temperament, Energy energy,
+                        Sociability sociability, String photo, String health_details, String description,
+                        StatusPet statusPet, List<String> tutorIds) {
         this.name = name;
         this.species = species;
         this.breed = breed;
-        this.age = age;
         this.sex = sex;
+        this.age = age;
         this.size = size;
         this.neutered = neutered;
         this.vaccinated = vaccinated;
@@ -50,17 +60,19 @@ public class AnimalEntity {
         this.photo = photo;
         this.health_details = health_details;
         this.description = description;
-        this.tutorIds = tutorIds;
         this.statusPet = statusPet;
+        this.tutorIds = tutorIds;
     }
 
+    // Conversão Model -> Entity
     public static AnimalEntity fromModel(AnimalModel model){
         return new AnimalEntity(
+            model.getId(),
             model.getName(),
             model.getSpecies(),
             model.getBreed(),
-            model.getAge(),
             model.getSex(),
+            model.getAge(),
             model.getSize(),
             model.getNeutered(),
             model.getVaccinated(),
@@ -70,10 +82,8 @@ public class AnimalEntity {
             model.getPhoto(),
             model.getHealth_details(),
             model.getDescription(),
-            model.getTutorIds(),
-            StatusPetEntity.valueOf(model.getStatus().name())
+            model.getStatus(),
+            model.getTutorIds()
         );
     }
-
-    protected AnimalEntity(){}
 }
