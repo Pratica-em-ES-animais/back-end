@@ -34,6 +34,7 @@ public class AnimalDto {
     private String sex;
 
     @Min(value = 0)
+    @Max(23)
     private Integer age;
 
     @Size(min=1, max=20)
