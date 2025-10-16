@@ -43,6 +43,7 @@ public class AnimalDto {
 
     @Max(value = 50)
     @Min(value = 0)
+    @Max(23)
     private Integer age;
 
     @Nonnull
