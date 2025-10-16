@@ -31,7 +31,7 @@ public class AnimalServiceTest {
 
     @Test
     public void shouldAdd(){
-        AnimalModel animal = new AnimalModel("Alemão", "Cachorro", "SRD", 7, "M","é um cachorro fofo demais", null, StatusPetModel.AVAILABLE);
+        AnimalModel animal = new AnimalModel("Alemão", "Dog", "Mixed", 7, "M", "Medium", true, true, "Calm", "Low", "Sociable", "photo_base64_data_here", "Vaccinated in 2023. Regular checkups done.", "é um cachorro fofo demais", null, StatusPetModel.AVAILABLE);
         var response = this.animalService.createAnimal(animal);
         animal.setId(response.getId());
         assertEquals(animal, response);
@@ -44,7 +44,7 @@ public class AnimalServiceTest {
 
     @Test
     public void getAllShouldReturnNonEmpty(){
-        AnimalModel animal = new AnimalModel("Alemão", "Cachorro", "SRD", 7, "M","é um cachorro fofo demais", null, StatusPetModel.AVAILABLE);
+        AnimalModel animal = new AnimalModel("Alemão", "Dog", "Mixed", 7, "M", "Medium", true, true, "Calm", "Low", "Sociable", "photo_base64_data_here", "Vaccinated in 2023. Regular checkups done.", "é um cachorro fofo demais", null, StatusPetModel.AVAILABLE);
         this.animalService.createAnimal(animal);
         assertFalse(this.animalService.getAll().isEmpty());
     }
