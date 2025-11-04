@@ -67,7 +67,6 @@ public class AnimalEntity {
     // Conversão Model -> Entity
     public static AnimalEntity fromModel(AnimalModel model){
         return new AnimalEntity(
-            model.getId(),
             model.getName(),
             model.getSpecies(),
             model.getBreed(),

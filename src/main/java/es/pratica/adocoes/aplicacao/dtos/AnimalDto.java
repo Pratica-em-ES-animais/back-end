@@ -96,7 +96,6 @@ public class AnimalDto {
 
     public static AnimalDto fromModel(AnimalModel model){
         return new AnimalDto(
-            model.getId(),
             model.getName(),
             model.getSpecies(),
             model.getBreed(),
