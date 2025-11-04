@@ -2,6 +2,16 @@ package es.pratica.adocoes.dominio.modelos;
 
 import java.util.List;
 
+import es.pratica.adocoes.dominio.enums.Species;
+import es.pratica.adocoes.dominio.enums.Breed;
+import es.pratica.adocoes.dominio.enums.Sex;
+import es.pratica.adocoes.dominio.enums.PetSize;
+import es.pratica.adocoes.dominio.enums.Temperament;
+import es.pratica.adocoes.dominio.enums.Energy;
+import es.pratica.adocoes.dominio.enums.Sociability;
+import es.pratica.adocoes.dominio.enums.StatusPet;
+
+
 import es.pratica.adocoes.adaptadores.persistencia.entidades.AnimalEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,31 +23,31 @@ import lombok.ToString;
 public class AnimalModel {
     private String id;
     private String name;
-    private String species;
-    private String breed;
-    private String sex;
+    private Species species;
+    private Breed breed;
+    private Sex sex;
     private Integer age;
-    private String size;
+    private PetSize size;
     private Boolean neutered;
     private Boolean vaccinated;
-    private String temperament;
-    private String energy;
-    private String sociability;
+    private Temperament temperament;
+    private Energy energy;
+    private Sociability sociability;
     private String photo;
     private String health_details;
     private String description;
+    private StatusPet status;
     private List<String> tutorIds;
-    private StatusPetModel status;
 
     // Construtor sem id (usado antes de persistir)
-    public AnimalModel(String name, String species, String breed, Integer age, String sex, String size, 
-                      Boolean neutered, Boolean vaccinated, String temperament, String energy, 
-                      String sociability, String photo, String health_details, String description, List<String> tutorIds, StatusPetModel status) {
+    public AnimalModel(String name, Species species, Breed breed, Sex sex, Integer age, PetSize size, 
+                       Boolean neutered, Boolean vaccinated, Temperament temperament, Energy energy, 
+                       Sociability sociability, String photo, String health_details, String description, StatusPet status, List<String> tutorIds) {
         this.name = name;
         this.species = species;
         this.breed = breed;
-        this.age = age;
         this.sex = sex;
+        this.age = age;
         this.size = size;
         this.neutered = neutered;
         this.vaccinated = vaccinated;
@@ -47,19 +57,19 @@ public class AnimalModel {
         this.photo = photo;
         this.health_details = health_details;
         this.description = description;
-        this.tutorIds = tutorIds;
         this.status = status;
+        this.tutorIds = tutorIds;
     }
 
-    // Conversão de Entity -> Model (mesmo padrão do UserModel)
-    public static AnimalModel toModel(AnimalEntity ae){
-        if (ae == null) return null;
+    // Conversão Model -> Entity
+    public static AnimalModel toModel(AnimalEntity ae) {
         return new AnimalModel(
+            ae.getId(),
             ae.getName(),
             ae.getSpecies(),
             ae.getBreed(),
-            ae.getAge(),
             ae.getSex(),
+            ae.getAge(),
             ae.getSize(),
             ae.getNeutered(),
             ae.getVaccinated(),
@@ -69,8 +79,8 @@ public class AnimalModel {
             ae.getPhoto(),
             ae.getHealth_details(),
             ae.getDescription(),
-            ae.getTutorIds(),
-            StatusPetModel.valueOf(ae.getStatusPet().name())
+            ae.getStatusPet(),
+            ae.getTutorIds()
         );
     }
 }

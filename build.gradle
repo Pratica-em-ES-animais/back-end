@@ -37,6 +37,8 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 	implementation 'org.hibernate.validator:hibernate-validator:8.0.1.Final'
 	implementation 'org.glassfish:jakarta.el:4.0.2'
+	// Added for file upload handling
+	implementation 'commons-io:commons-io:2.11.0'
 }
 
 tasks.named('test') {
