@@ -25,7 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import es.pratica.adocoes.aplicacao.casosdeuso.CreateAnimalUC;
 import es.pratica.adocoes.aplicacao.casosdeuso.GetAnimalUC;
 import es.pratica.adocoes.aplicacao.dtos.AnimalDto;
-import es.pratica.adocoes.dominio.servicos.FileStorageService;
+import es.pratica.adocoes.dominio.servicos.interfaceservice.FileStorageServiceInterface;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
@@ -35,7 +35,7 @@ import lombok.AllArgsConstructor;
 public class AnimalController {
     private final CreateAnimalUC createAnimalUC;
     private final GetAnimalUC getAnimalUC;
-    private final FileStorageService fileStorageService;
+    private final FileStorageServiceInterface fileStorageService;
 
     @PostMapping("/create")
     @CrossOrigin("*")

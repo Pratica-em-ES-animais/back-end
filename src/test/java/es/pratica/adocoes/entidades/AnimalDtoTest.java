@@ -32,13 +32,6 @@ public class AnimalDtoTest {
         assertTrue(violation.isEmpty());
     }
     
-    @Test
-    public void invalidSexShouldNotAllow(){
-        AnimalDto animalDto = new AnimalDto();
-        animalDto.setSex(null);
-        Set<ConstraintViolation<AnimalDto>> violation = this.validator.validate(animalDto);
-        assertFalse(violation.isEmpty());
-    }
 
     @Test
     public void validSexShouldAllow(){

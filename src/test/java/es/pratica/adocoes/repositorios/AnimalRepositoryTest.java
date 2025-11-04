@@ -39,25 +39,25 @@ public class AnimalRepositoryTest {
     }
 
     @Test
-public void addingAnimalShouldChangeDbState(){
-    AnimalModel animal = new AnimalModel(
-        "Alemao", // name
-        Species.Cachorro, // species
-        Breed.VIRA_LATA, // breed
-        Sex.M, // sex
-        7, // age
-        PetSize.Medio, // size
-        true, // neutered
-        true, // vaccinated
-        Temperament.Normal, // temperament
-        Energy.Baixa, // energy
-        Sociability.Sociavel, // sociability
-        "photo_base64_data_here", // photo
-        "Vaccinated in 2023. Regular checkups done.", // health_details
-        "é um cachorro fofo demais", // description
-        StatusPet.AVAILABLE, // status
-        null // tutorIds
-    );
+    public void addingAnimalShouldChangeDbState(){
+        AnimalModel animal = new AnimalModel(
+            "Alemao", // name
+            Species.Cachorro, // species
+            Breed.VIRA_LATA, // breed
+            Sex.M, // sex
+            7, // age
+            PetSize.Medio, // size
+            true, // neutered
+            true, // vaccinated
+            Temperament.Normal, // temperament
+            Energy.Baixa, // energy
+            Sociability.Sociavel, // sociability
+            "photo_base64_data_here", // photo
+            "Vaccinated in 2023. Regular checkups done.", // health_details
+            "é um cachorro fofo demais", // description
+            StatusPet.AVAILABLE, // status
+            null // tutorIds
+        );
 
     this.animalRepository.add(animal);
     assertNotEquals(0, animalRepoMongo.count());

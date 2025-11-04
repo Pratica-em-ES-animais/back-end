@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import es.pratica.adocoes.dominio.servicos.interfaceservice.FileStorageServiceInterface;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,7 +15,8 @@ import java.nio.file.StandardCopyOption;
 import java.util.UUID;
 
 @Service
-public class FileStorageService {
+
+public class FileStorageService implements FileStorageServiceInterface{
 
     @Value("${file.upload-dir}")
     private String uploadDir;
