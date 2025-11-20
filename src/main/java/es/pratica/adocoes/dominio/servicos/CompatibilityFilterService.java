@@ -24,17 +24,36 @@ public class CompatibilityFilterService implements CompatibilityFilterServiceInt
         try {
             // Montar prompt
             String prompt = String.format("""
-You are an assistant that compares a user's profile with a list of pets.
-Each pet has attributes like id, size, energy, temperament, and good_with_kids.
-The user has preferences for size, energy, children, etc.
+You are a pet adoption specialist that analyzes compatibility between users and pets for adoption.
 
-Compare each pet to the user and assign a match_score between 0 and 1.
-Output a JSON array of objects, each containing "id" and "match_score", sorted by descending score.
-Only output valid JSON.
+ANALYSIS CRITERIA:
+1. User's LIFESTYLE: Consider their living situation, daily routine, experience with pets, family composition, available time, and financial situation.
+2. User's PREFERENCES: Consider their desired pet characteristics, size, energy level, temperament, and specific requirements.
+3. Pet CHARACTERISTICS: Consider each pet's species, size, energy level, temperament, sociability, health status, and special needs.
 
-User profile: %s
-Pets: %s
-""", objectMapper.writeValueAsString(userProfile), objectMapper.writeValueAsString(pets));
+MATCHING PROCESS:
+- Analyze how well each pet's needs align with the user's lifestyle
+- Consider if the user's preferences match the pet's characteristics
+- Factor in practical compatibility (living space, activity level, experience needed)
+- Consider long-term sustainability of the match
+
+SCORING:
+Assign a match_score between 0.0 and 1.0 where:
+- 0.8-1.0: Excellent match (highly compatible)
+- 0.6-0.8: Good match (compatible with minor considerations)
+- 0.4-0.6: Fair match (some concerns but workable)
+- 0.0-0.4: Poor match (significant incompatibilities)
+
+OUTPUT: JSON array of objects with "id" and "match_score", sorted by descending score.
+Only output valid JSON, no explanations.
+
+USER LIFESTYLE: %s
+USER PREFERENCES: %s
+AVAILABLE PETS: %s
+""", 
+    userProfile.getLifestyle() != null ? userProfile.getLifestyle() : "Not provided",
+    userProfile.getPreferences() != null ? userProfile.getPreferences() : "Not provided", 
+    objectMapper.writeValueAsString(pets));
 
             // Montar corpo da requisição
             Map<String, Object> body = Map.of(
