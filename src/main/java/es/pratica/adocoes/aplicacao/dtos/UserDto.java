@@ -34,6 +34,8 @@ public class UserDto {
     @Pattern(regexp = "[0-9]{9}")
     private String phone;
     private String senha;
+    private String lifestyle;
+    private String preferences;
 
     public UserDto(){}
 
@@ -47,14 +49,26 @@ public class UserDto {
         this.senha = senha;
     }
 
+    public UserDto(String cpf,String firstName, String lastName, String email, String ddd, String phone, String senha, String lifestyle, String preferences) {
+        this.cpf = cpf;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.ddd = ddd;
+        this.phone = phone;
+        this.senha = senha;
+        this.lifestyle = lifestyle;
+        this.preferences = preferences;
+    }
+
     // retrieving an user
     public static UserDto fromModel(UserModel model){
-        return new UserDto(model.getId(), model.getCpf(), model.getFirstName(), model.getLastName(), model.getEmail(), model.getDdd(), model.getCpf(), model.getSenha());
+        return new UserDto(model.getId(), model.getCpf(), model.getFirstName(), model.getLastName(), model.getEmail(), model.getDdd(), model.getPhone(), model.getSenha(), model.getLifestyle(), model.getPreferences());
     }
 
     // creating an user
     public static UserModel toModel(UserDto dto){ 
-        return new UserModel(dto.getCpf(), dto.getFirstName(),dto.getLastName(), dto.getEmail(), dto.getDdd(), dto.getPhone(), dto.getSenha());
+        return new UserModel(dto.getCpf(), dto.getFirstName(),dto.getLastName(), dto.getEmail(), dto.getDdd(), dto.getPhone(), dto.getSenha(), dto.getLifestyle(), dto.getPreferences());
     }
 
 }

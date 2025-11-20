@@ -18,6 +18,8 @@ public class UserModel {
     private String ddd;
     private String phone;
     private String senha;
+    private String lifestyle;
+    private String preferences;
 
 
 
@@ -31,11 +33,23 @@ public class UserModel {
         this.senha = senha;
     }
 
+    public UserModel(String cpf, String firstName, String lastName, String email, String ddd, String phone, String senha, String lifestyle, String preferences){
+        this.cpf = cpf;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.ddd = ddd;
+        this.phone = phone;
+        this.senha = senha;
+        this.lifestyle = lifestyle;
+        this.preferences = preferences;
+    }
+
 
 
     public static UserModel toModel(UserEntity ue){
        return new UserModel(ue.getId(), ue.getCpf(), ue.getFirstName(), 
-                    ue.getLastName(), ue.getEmail(), ue.getDdd(),ue.getPhone(), ue.getSenha());
+                    ue.getLastName(), ue.getEmail(), ue.getDdd(),ue.getPhone(), ue.getSenha(), ue.getLifestyle(), ue.getPreferences());
     }
 
 

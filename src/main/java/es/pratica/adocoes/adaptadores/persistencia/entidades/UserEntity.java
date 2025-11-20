@@ -21,9 +21,12 @@ public class UserEntity {
     private String ddd;
     private String phone;
     private String senha;
+    private String lifestyle;
+    private String preferences;
 
     public static UserEntity fromModel(UserModel model){
         return new UserEntity(model.getId(), model.getCpf(), model.getFirstName(), 
-                                model.getLastName(), model.getEmail(), model.getDdd(), model.getPhone(), model.getSenha());
+                                model.getLastName(), model.getEmail(), model.getDdd(), model.getPhone(), model.getSenha(), 
+                                model.getLifestyle(), model.getPreferences());
     }
 }
