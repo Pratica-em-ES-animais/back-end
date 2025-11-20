@@ -12,6 +12,7 @@ import org.springframework.test.context.ActiveProfiles;
 import es.pratica.adocoes.adaptadores.persistencia.interfacesdb.UserRepoInterface;
 import es.pratica.adocoes.aplicacao.casosdeuso.LoginUserUC;
 import es.pratica.adocoes.aplicacao.dtos.UserLoginDto;
+import es.pratica.adocoes.dominio.enums.Role;
 import es.pratica.adocoes.dominio.modelos.UserModel;
 import es.pratica.adocoes.dominio.servicos.interfaceservice.UserServiceInterface;
 
@@ -33,14 +34,14 @@ public class LoginServiceTest {
 
     @Test
     public void loginWithWrongPasswordShouldReturnNull(){
-        var um = new UserModel("12345678910", "Ronaldinho", "Gaucho","ronaldinho@gmail.com", "51", "981230036", "interCampeaoDoMundo");
+        var um = new UserModel("12345678910", "Ronaldinho", "Gaucho","ronaldinho@gmail.com", "51", "981230036", "interCampeaoDoMundo", Role.USER);
         userService.createUser(um);
         assertNull(this.loginUserUC.login(new UserLoginDto("ronaldinho@gmail.com", "null")));
     }
 
     @Test
     public void loginWithCorrectPasswordShouldReturnNotNull(){
-        var um = new UserModel("12345678910", "Ronaldinho", "Gaucho","ronaldinho@gmail.com", "51", "981230036", "interCampeaoDoMundo");
+        var um = new UserModel("12345678910", "Ronaldinho", "Gaucho","ronaldinho@gmail.com", "51", "981230036", "interCampeaoDoMundo", Role.USER);
         userService.createUser(um);
         assertNotNull(this.loginUserUC.login(new UserLoginDto("ronaldinho@gmail.com", "interCampeaoDoMundo")));
     }

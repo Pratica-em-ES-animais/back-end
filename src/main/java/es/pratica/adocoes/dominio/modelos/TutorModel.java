@@ -2,6 +2,7 @@ package es.pratica.adocoes.dominio.modelos;
 
 
 import es.pratica.adocoes.adaptadores.persistencia.entidades.TutorEntity;
+import es.pratica.adocoes.dominio.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -17,6 +18,7 @@ public class TutorModel {
     private String phone;
     private String senha;
     private OngModel ongModel;
+    private Role role;
 
     public TutorModel(String cpf, String firstName, String lastName, String email,
                       String ddd, String phone, String senha, OngModel ongModel){
@@ -32,7 +34,7 @@ public class TutorModel {
 
     public static TutorModel toModel(TutorEntity entity) {
         return new TutorModel(entity.getId(), entity.getCpf(), entity.getFirstName(), entity.getLastName(),
-                    entity.getEmail(), entity.getDdd(), entity.getPhone(), entity.getSenha(), OngModel.toModel(entity.getOngEntity()));
+                    entity.getEmail(), entity.getDdd(), entity.getPhone(), entity.getSenha(), OngModel.toModel(entity.getOngEntity()), entity.getRole());
     }
 
 

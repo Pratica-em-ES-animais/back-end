@@ -30,5 +30,14 @@ public class OngRepoMongo implements OngRepository {
         }
         return Optional.empty();
     }
+
+    @Override
+    public Optional<OngModel> getById(String id) {
+        var response = this.ongRepo.findById(id);
+        if(response.isPresent()){
+            return response.map(OngModel::toModel);
+        }
+        return Optional.empty();
+    }
     
 }

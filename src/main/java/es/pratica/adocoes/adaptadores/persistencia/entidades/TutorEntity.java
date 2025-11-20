@@ -3,6 +3,8 @@ package es.pratica.adocoes.adaptadores.persistencia.entidades;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import es.pratica.adocoes.dominio.enums.Role;
 import es.pratica.adocoes.dominio.modelos.TutorModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,8 +26,9 @@ public class TutorEntity {
     private String senha;
     @DBRef
     private OngEntity ongEntity;
+    private Role role;
 
     public static TutorEntity fromModel(TutorModel tutorModel){
-        return new TutorEntity(tutorModel.getId(), tutorModel.getCpf(), tutorModel.getFirstName(), tutorModel.getLastName(), tutorModel.getEmail(),tutorModel.getDdd(),tutorModel.getPhone(),tutorModel.getSenha(), OngEntity.fromModel(tutorModel.getOngModel()));
+        return new TutorEntity(tutorModel.getId(), tutorModel.getCpf(), tutorModel.getFirstName(), tutorModel.getLastName(), tutorModel.getEmail(),tutorModel.getDdd(),tutorModel.getPhone(),tutorModel.getSenha(), OngEntity.fromModel(tutorModel.getOngModel()), tutorModel.getRole());
     }
 }

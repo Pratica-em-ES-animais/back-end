@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import es.pratica.adocoes.adaptadores.persistencia.entidades.TutorEntity;
 import es.pratica.adocoes.adaptadores.persistencia.interfacesdb.TutorRepoInterface;
+import es.pratica.adocoes.dominio.enums.Role;
 import es.pratica.adocoes.dominio.interfacerepositorios.TutorRepository;
 import es.pratica.adocoes.dominio.modelos.TutorModel;
 import lombok.AllArgsConstructor;
@@ -18,6 +19,7 @@ public class TutorRepoMongo implements TutorRepository{
 
     @Override
     public TutorModel add(TutorModel tutorModel) {
+        tutorModel.setRole(Role.ONG);
         this.tutorRepo.save(TutorEntity.fromModel(tutorModel));
         return tutorModel;
     }

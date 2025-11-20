@@ -4,6 +4,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 
 import com.mongodb.lang.NonNull;
 
+import es.pratica.adocoes.dominio.enums.Role;
 import es.pratica.adocoes.dominio.modelos.OngModel;
 import es.pratica.adocoes.dominio.modelos.TutorModel;
 import jakarta.validation.constraints.Email;
@@ -46,4 +47,6 @@ public class TutorCreateDto {
         ongModel.setId(dto.getOngId());
         return new TutorModel(dto.getCpf(), dto.getFirstName(), dto.getLastName(),dto.getEmail(),dto.getDdd(), dto.getPhone(), dto.getSenha(), ongModel);
     }
+
+  
 }
