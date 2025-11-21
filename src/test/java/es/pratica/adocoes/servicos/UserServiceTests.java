@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import es.pratica.adocoes.adaptadores.persistencia.interfacesdb.UserRepoInterface;
+import es.pratica.adocoes.dominio.enums.Role;
 import es.pratica.adocoes.dominio.modelos.UserModel;
 import es.pratica.adocoes.dominio.servicos.interfaceservice.UserServiceInterface;
 
@@ -34,7 +35,7 @@ public class UserServiceTests {
     @BeforeAll
     public void init(){
         MockitoAnnotations.openMocks(this);
-        this.um = new UserModel("12345678910", "Ronaldinho", "Gaucho","ronaldinho@gmail.com", "51", "981230036", "interCampeaoDoMundo");
+        this.um = new UserModel("12345678910", "Ronaldinho", "Gaucho","ronaldinho@gmail.com", "51", "981230036", "interCampeaoDoMundo", Role.USER);
     }
 
     @AfterEach

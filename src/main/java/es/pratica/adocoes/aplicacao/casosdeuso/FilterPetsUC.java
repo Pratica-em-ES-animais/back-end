@@ -7,13 +7,13 @@ import org.springframework.stereotype.Component;
 
 import es.pratica.adocoes.dominio.modelos.AnimalModel;
 import es.pratica.adocoes.aplicacao.dtos.UserDto;
-import es.pratica.adocoes.dominio.servicos.CompatibilityFilterService;
+import es.pratica.adocoes.dominio.servicos.interfaceservice.CompatibilityFilterServiceInterface;
 
 @Component
 public class FilterPetsUC {
-    private final CompatibilityFilterService filterService;
+    private final CompatibilityFilterServiceInterface filterService;
 
-    public FilterPetsUC(CompatibilityFilterService filterService) {
+    public FilterPetsUC(CompatibilityFilterServiceInterface filterService) {
         this.filterService = filterService;
     }
 
