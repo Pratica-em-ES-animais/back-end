@@ -12,6 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,9 +40,13 @@ public class AnimalController {
 
     @PostMapping("/create")
     @CrossOrigin("*")
-    public ResponseEntity<AnimalResponseDto> createAnimal(
-            @RequestBody @Valid AnimalCreateDto animalCreateDto) {
-
+    public ResponseEntity<?> createAnimal(
+            @RequestBody @Valid AnimalCreateDto animalCreateDto, BindingResult bindingResult) {
+        
+        if(bindingResult.hasErrors()){
+            String erro = bindingResult.getFieldErrors().get(0).getDefaultMessage();
+            return ResponseEntity.badRequest().body(erro);
+        }
         var createdAnimal = this.createAnimalUC.run(animalCreateDto);
 
         if (createdAnimal == null) {

@@ -20,7 +20,7 @@ public class AuthController {
     private final LoginUserUC loginUserUC;
 
     @PostMapping("/login")
-    @CrossOrigin
+    @CrossOrigin("*")
     public ResponseEntity<?> login(@RequestBody UserLoginDto dto, HttpSession request){
         DetailsBaseDTO userDto = this.loginUserUC.login(dto);
         if(userDto == null){

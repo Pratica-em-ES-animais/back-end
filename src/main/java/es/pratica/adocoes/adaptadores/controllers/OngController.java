@@ -2,6 +2,7 @@ package es.pratica.adocoes.adaptadores.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +21,12 @@ public class OngController {
 
     @PostMapping("/create")
     @CrossOrigin("*")
-    public ResponseEntity<OngDto> createOng(@RequestBody @Valid OngDto dto){
+    public ResponseEntity<?> createOng(@RequestBody @Valid OngDto dto, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            String erro = bindingResult.getFieldErrors().get(0).getDefaultMessage();
+            return ResponseEntity.badRequest().body(erro);
+        }
+        
         if(this.createOngUC.createOng(dto) == null){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
