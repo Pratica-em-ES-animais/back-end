@@ -3,7 +3,8 @@ package es.pratica.adocoes.aplicacao.dtos;
 import java.util.List;
 
 import es.pratica.adocoes.dominio.enums.Species;
-import es.pratica.adocoes.dominio.enums.Breed;
+import es.pratica.adocoes.dominio.enums.CatBreed;
+import es.pratica.adocoes.dominio.enums.DogBreed;
 import es.pratica.adocoes.dominio.enums.Sex;
 import es.pratica.adocoes.dominio.enums.PetSize;
 import es.pratica.adocoes.dominio.enums.Temperament;
@@ -17,15 +18,12 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-public class AnimalDto {
-    private String id;
+public class AnimalCreateDto {
 
     @Nonnull
     @Pattern(regexp = "[a-zA-ZÀ-ÿ\\- ]+")
@@ -35,15 +33,15 @@ public class AnimalDto {
     @Nonnull
     private Species species;
 
-    @Nonnull
-    private Breed breed;
+    private DogBreed dogBreed;
+
+    private CatBreed catBreed;
 
     @Nonnull
     private Sex sex;
 
     @Max(value = 50)
     @Min(value = 0)
-    @Max(23)
     private Integer age;
 
     @Nonnull
@@ -73,12 +71,13 @@ public class AnimalDto {
 
     private List<String> tutorIds;
 
-    public AnimalDto(String name, Species species, Breed breed, Sex sex, Integer age, PetSize size,
+    public AnimalCreateDto(String name, Species species, DogBreed dogBreed, CatBreed catBreed, Sex sex, Integer age, PetSize size,
                      Boolean neutered, Boolean vaccinated, Temperament temperament, Energy energy, Sociability sociability,
                      String photo, String health_details, String description, StatusPet status, List<String> tutorIds){
         this.name = name;
         this.species = species;
-        this.breed = breed;
+        this.dogBreed = dogBreed;
+        this.catBreed = catBreed;
         this.sex = sex;
         this.age = age;
         this.size = size;
@@ -94,12 +93,12 @@ public class AnimalDto {
         this.tutorIds = tutorIds;
     }
 
-    public static AnimalDto fromModel(AnimalModel model){
-        return new AnimalDto(
-            model.getId(),
+    public static AnimalCreateDto fromModel(AnimalModel model){
+        return new AnimalCreateDto(
             model.getName(),
             model.getSpecies(),
-            model.getBreed(),
+            model.getDogBreed(),
+            model.getCatBreed(),
             model.getSex(),
             model.getAge(),
             model.getSize(),
@@ -116,11 +115,12 @@ public class AnimalDto {
         );
     }
 
-    public static AnimalModel toModel(AnimalDto dto){
+    public static AnimalModel toModel(AnimalCreateDto dto){
         return new AnimalModel(
             dto.getName(),
             dto.getSpecies(),
-            dto.getBreed(),
+            dto.getDogBreed(),
+            dto.getCatBreed(),
             dto.getSex(),
             dto.getAge(),
             dto.getSize(),

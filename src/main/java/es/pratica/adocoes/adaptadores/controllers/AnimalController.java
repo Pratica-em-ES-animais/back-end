@@ -21,10 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
 import es.pratica.adocoes.aplicacao.casosdeuso.CreateAnimalUC;
 import es.pratica.adocoes.aplicacao.casosdeuso.GetAnimalUC;
-import es.pratica.adocoes.aplicacao.dtos.AnimalDto;
+import es.pratica.adocoes.aplicacao.dtos.AnimalCreateDto;
+import es.pratica.adocoes.aplicacao.dtos.AnimalResponseDto;
 import es.pratica.adocoes.dominio.servicos.interfaceservice.FileStorageServiceInterface;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -39,35 +39,47 @@ public class AnimalController {
 
     @PostMapping("/create")
     @CrossOrigin("*")
-    public ResponseEntity<AnimalDto> createAnimal(@RequestBody @Valid AnimalDto animalDto){
-        if(this.createAnimalUC.run(animalDto) == null){
+    public ResponseEntity<AnimalResponseDto> createAnimal(
+            @RequestBody @Valid AnimalCreateDto animalCreateDto) {
+
+        var createdAnimal = this.createAnimalUC.run(animalCreateDto);
+
+        if (createdAnimal == null) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
-        return new ResponseEntity<>(animalDto, HttpStatus.CREATED);
+
+        return new ResponseEntity<>(createdAnimal, HttpStatus.CREATED);
     }
 
-    @PostMapping(value = "/upload-photo", consumes = "multipart/form-data")
+    @PostMapping(value = "/upload-photo/{id}", consumes = "multipart/form-data")
     @CrossOrigin("*")
-    public ResponseEntity<Map<String, String>> uploadPhoto(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<Map<String, String>> uploadPhotoToAnimal(
+            @PathVariable String id,
+            @RequestParam("file") MultipartFile file) {
+
         try {
+            // 1️⃣ Salva arquivo no disco
             String filename = fileStorageService.storeFile(file);
-            
+
+            // 2️⃣ Atualiza o animal com o nome da foto
+            createAnimalUC.attachPhotoToAnimal(id, filename);
+
+            // 3️⃣ Resposta pro front
             Map<String, String> response = new HashMap<>();
             response.put("filename", filename);
             response.put("url", "/api/animal/photo/" + filename);
-            response.put("message", "Photo uploaded successfully");
-            
+            response.put("message", "Photo uploaded and attached successfully");
+
             return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch (IOException e) {
-            Map<String, String> error = new HashMap<>();
-            error.put("error", "Failed to upload file: " + e.getMessage());
-            return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
-        } catch (IllegalArgumentException e) {
+
+        } catch (Exception e) {
             Map<String, String> error = new HashMap<>();
             error.put("error", e.getMessage());
             return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
         }
     }
+
+
 
     @GetMapping("/photo/{filename}")
     @CrossOrigin("*")
@@ -95,7 +107,7 @@ public class AnimalController {
 
     @GetMapping("/pets")
     @CrossOrigin("*")
-    public ResponseEntity<List<AnimalDto>> getAll(){
+    public ResponseEntity<List<AnimalResponseDto>> getAll(){
         return new ResponseEntity<>(this.getAnimalUC.getAll(), HttpStatus.OK);
     }
 }
