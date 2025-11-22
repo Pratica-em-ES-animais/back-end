@@ -2,6 +2,7 @@ package es.pratica.adocoes.dominio.modelos;
 
 
 import es.pratica.adocoes.adaptadores.persistencia.entidades.UserEntity;
+import es.pratica.adocoes.dominio.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.ToString;
@@ -20,10 +21,11 @@ public class UserModel {
     private String senha;
     private String lifestyle;
     private String preferences;
+    private Role role;
 
 
 
-    public UserModel(String cpf, String firstName, String lastName, String email, String ddd, String phone, String senha){
+    public UserModel(String cpf, String firstName, String lastName, String email, String ddd, String phone, String senha, Role role){
         this.cpf = cpf;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -49,7 +51,8 @@ public class UserModel {
 
     public static UserModel toModel(UserEntity ue){
        return new UserModel(ue.getId(), ue.getCpf(), ue.getFirstName(), 
-                    ue.getLastName(), ue.getEmail(), ue.getDdd(),ue.getPhone(), ue.getSenha(), ue.getLifestyle(), ue.getPreferences());
+                    ue.getLastName(), ue.getEmail(), ue.getDdd(),
+                    ue.getPhone(), ue.getSenha(), ue.getLifestyle(), ue.getPreferences(), ue.getRole());
     }
 
 

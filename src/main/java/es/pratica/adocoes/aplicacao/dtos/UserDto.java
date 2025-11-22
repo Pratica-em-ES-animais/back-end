@@ -2,6 +2,7 @@ package es.pratica.adocoes.aplicacao.dtos;
 
 import com.mongodb.lang.NonNull;
 
+import es.pratica.adocoes.dominio.enums.Role;
 import es.pratica.adocoes.dominio.modelos.UserModel;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
@@ -36,6 +37,7 @@ public class UserDto {
     private String senha;
     private String lifestyle;
     private String preferences;
+    private Role role;
 
     public UserDto(){}
 
@@ -63,7 +65,7 @@ public class UserDto {
 
     // retrieving an user
     public static UserDto fromModel(UserModel model){
-        return new UserDto(model.getId(), model.getCpf(), model.getFirstName(), model.getLastName(), model.getEmail(), model.getDdd(), model.getPhone(), model.getSenha(), model.getLifestyle(), model.getPreferences());
+        return new UserDto(model.getId(), model.getCpf(), model.getFirstName(), model.getLastName(), model.getEmail(), model.getDdd(), model.getPhone(), model.getSenha(), model.getLifestyle(), model.getPreferences(), model.getRole());
     }
 
     // creating an user

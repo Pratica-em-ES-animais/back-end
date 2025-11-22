@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import es.pratica.adocoes.dominio.enums.Role;
 import es.pratica.adocoes.dominio.interfacerepositorios.UserRepository;
 import es.pratica.adocoes.dominio.modelos.UserModel;
 import es.pratica.adocoes.dominio.servicos.interfaceservice.UserServiceInterface;
@@ -19,6 +20,7 @@ public class UserService implements UserServiceInterface{
     @Override
     public UserModel createUser(UserModel userModel){
         userModel.setSenha(this.passwordEncoder.encode(userModel.getSenha()));
+        userModel.setRole(Role.USER);
         return this.userRepositorio.add(userModel);
     }
 
