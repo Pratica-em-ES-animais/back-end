@@ -2,6 +2,7 @@ package es.pratica.adocoes.adaptadores.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ public class AuthController {
     private final LoginUserUC loginUserUC;
 
     @PostMapping("/login")
+    @CrossOrigin("*")
     public ResponseEntity<?> login(@RequestBody UserLoginDto dto, HttpServletRequest request){
         UserDto userDto = this.loginUserUC.login(dto);
         if(userDto == null){
