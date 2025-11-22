@@ -26,6 +26,7 @@ public class FilterController {
     }
 
     @PostMapping
+    @CrossOrigin("*")
     public List<Map<String, Object>> filtrar(HttpServletRequest request) {
         // simular usuário logado (substituir depois por SecurityContext)
         //UserDto userMock = new UserDto("02783985020", "rafa", "franca", "rafa@franca.com", "51", "999999999", "senha123");

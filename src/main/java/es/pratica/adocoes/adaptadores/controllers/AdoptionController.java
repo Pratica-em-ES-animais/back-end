@@ -2,6 +2,7 @@ package es.pratica.adocoes.adaptadores.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,8 +23,11 @@ public class AdoptionController {
 
     @PostMapping("/create")
     @CrossOrigin("*")
-    public ResponseEntity<AdoptionDto> createAdoption(@RequestBody @Valid AdoptionDto adoptionDto){
-
+    public ResponseEntity<?> createAdoption(@RequestBody @Valid AdoptionDto adoptionDto, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            String erro = bindingResult.getFieldErrors().get(0).getDefaultMessage();
+            return ResponseEntity.badRequest().body(erro);
+        }
         AdoptionModel adoptionModelResponse = this.createAdoptionUC.run(adoptionDto.getAnimalId(), adoptionDto.getAdopterId(), adoptionDto.getTutorId());
 
         AdoptionDto adoptionDtoResponse = AdoptionDto.fromModel(adoptionModelResponse);
