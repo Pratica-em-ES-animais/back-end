@@ -3,7 +3,8 @@ package es.pratica.adocoes.dominio.modelos;
 import java.util.List;
 
 import es.pratica.adocoes.dominio.enums.Species;
-import es.pratica.adocoes.dominio.enums.Breed;
+import es.pratica.adocoes.dominio.enums.CatBreed;
+import es.pratica.adocoes.dominio.enums.DogBreed;
 import es.pratica.adocoes.dominio.enums.Sex;
 import es.pratica.adocoes.dominio.enums.PetSize;
 import es.pratica.adocoes.dominio.enums.Temperament;
@@ -24,7 +25,8 @@ public class AnimalModel {
     private String id;
     private String name;
     private Species species;
-    private Breed breed;
+    private DogBreed dogBreed;
+    private CatBreed catBreed;
     private Sex sex;
     private Integer age;
     private PetSize size;
@@ -40,12 +42,13 @@ public class AnimalModel {
     private List<String> tutorIds;
 
     // Construtor sem id (usado antes de persistir)
-    public AnimalModel(String name, Species species, Breed breed, Sex sex, Integer age, PetSize size, 
+    public AnimalModel(String name, Species species, DogBreed dogBreed, CatBreed catBreed, Sex sex, Integer age, PetSize size, 
                        Boolean neutered, Boolean vaccinated, Temperament temperament, Energy energy, 
                        Sociability sociability, String photo, String health_details, String description, StatusPet status, List<String> tutorIds) {
         this.name = name;
         this.species = species;
-        this.breed = breed;
+        this.dogBreed = dogBreed;
+        this.catBreed = catBreed;
         this.sex = sex;
         this.age = age;
         this.size = size;
@@ -67,7 +70,8 @@ public class AnimalModel {
             ae.getId(),
             ae.getName(),
             ae.getSpecies(),
-            ae.getBreed(),
+            ae.getDogBreed(),
+            ae.getCatBreed(),
             ae.getSex(),
             ae.getAge(),
             ae.getSize(),

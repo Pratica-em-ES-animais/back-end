@@ -1,6 +1,6 @@
 package es.pratica.adocoes.dominio.enums;
 
-public enum Breed {
+public enum DogBreed {
     // Cães
     VIRA_LATA,
     LABRADOR,
@@ -10,14 +10,4 @@ public enum Breed {
     PINSCHER,
     SHIH_TZU,
     PASTOR_ALEMAO,
-
-    // Gatos
-    SRD,
-    PERSA,
-    SIAMES,
-    MAINE_COON,
-    SPHYNX,
-    ANGORA,
-    BENGAL,
-    BRITISH_SHORTHAIR;
 }
