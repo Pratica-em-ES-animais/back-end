@@ -1,5 +1,6 @@
 package es.pratica.adocoes.adaptadores.persistencia.implementrepos;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
@@ -38,6 +39,11 @@ public class OngRepoMongo implements OngRepository {
             return response.map(OngModel::toModel);
         }
         return Optional.empty();
+    }
+
+    @Override
+    public List<OngModel> getAll() {
+      return this.ongRepo.findAll().stream().map(OngModel::toModel).toList();
     }
     
 }

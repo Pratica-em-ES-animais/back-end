@@ -1,5 +1,7 @@
 package es.pratica.adocoes.dominio.servicos;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import es.pratica.adocoes.dominio.interfacerepositorios.OngRepository;
@@ -28,6 +30,11 @@ public class OngService implements OngServiceInterface {
             return response.get();
         }
         return null;
+    }
+
+    @Override
+    public List<OngModel> getAll() {
+        return this.ongRepo.getAll();
     }
     
 }
