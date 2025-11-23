@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import es.pratica.adocoes.aplicacao.casosdeuso.CreateTutorUC;
+import es.pratica.adocoes.aplicacao.dtos.DetailsBaseDTO;
 import es.pratica.adocoes.aplicacao.dtos.TutorCreateDto;
 import es.pratica.adocoes.aplicacao.dtos.TutorResponseDto;
 import jakarta.validation.Valid;
@@ -22,16 +24,18 @@ public class TutorController {
 
     @PostMapping("/create")
     @CrossOrigin("*")
-    public ResponseEntity<?> createTutor(@Valid @RequestBody TutorCreateDto dto, BindingResult bindingResult){
+    public ResponseEntity<?> createTutor(@Valid @RequestBody TutorCreateDto dto, BindingResult bindingResult) throws Exception{
         if(bindingResult.hasErrors()){
             String erro = bindingResult.getFieldErrors().get(0).getDefaultMessage();
             return ResponseEntity.badRequest().body(erro);
         }
         TutorResponseDto response = this.createTutorUC.createTutor(dto); 
         if(response == null){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new Exception("Um erro ocorreu ao tentar criar um novo tutor.");
         }
-        return new ResponseEntity<>(response , HttpStatus.CREATED);
+        
+        var resp = new DetailsBaseDTO(response.getId(), response.getRole(), response.getFirstName(), response.getLastName());
+        return new ResponseEntity<>(resp , HttpStatus.CREATED);
     }
 
 }
