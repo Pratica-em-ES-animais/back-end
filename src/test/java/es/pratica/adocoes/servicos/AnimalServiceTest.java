@@ -11,7 +11,8 @@ import org.springframework.test.context.ActiveProfiles;
 
 import es.pratica.adocoes.adaptadores.persistencia.interfacesdb.AnimalRepoInterface;
 import es.pratica.adocoes.dominio.modelos.AnimalModel;
-import es.pratica.adocoes.dominio.enums.Breed;
+import es.pratica.adocoes.dominio.enums.CatBreed;
+import es.pratica.adocoes.dominio.enums.DogBreed;
 import es.pratica.adocoes.dominio.enums.Energy;
 import es.pratica.adocoes.dominio.enums.PetSize;
 import es.pratica.adocoes.dominio.enums.Sex;
@@ -41,7 +42,8 @@ public class AnimalServiceTest {
         AnimalModel animal = new AnimalModel(
             "Alemao", // name
             Species.Cachorro, // species
-            Breed.VIRA_LATA, // breed
+            DogBreed.VIRA_LATA,
+            null, // breed
             Sex.M, // sex
             7, // age
             PetSize.Medio, // size
@@ -72,7 +74,8 @@ public class AnimalServiceTest {
         AnimalModel animal = new AnimalModel(
             "Alemao", // name
             Species.Cachorro, // species
-            Breed.VIRA_LATA, // breed
+            DogBreed.VIRA_LATA,
+            null, // breed
             Sex.M, // sex
             7, // age
             PetSize.Medio, // size

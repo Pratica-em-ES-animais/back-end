@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 public class OngDto {
      private String id;
     @NonNull
-    @Pattern(regexp = "[0-9]{11}")
+    @Pattern(regexp = "[0-9]{14}")
     @Indexed(unique = true)
     private String cnpj;
     @NonNull
