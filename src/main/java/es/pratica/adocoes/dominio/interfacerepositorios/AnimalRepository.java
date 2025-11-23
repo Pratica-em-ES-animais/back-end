@@ -6,9 +6,16 @@ import java.util.Optional;
 import es.pratica.adocoes.dominio.modelos.AnimalModel;
 
 public interface AnimalRepository {
-    public AnimalModel add(AnimalModel animalModel);
-    public Optional<AnimalModel> getById(String id);
-    public void removeAll();
-    public Optional<AnimalModel> getByName(String name);
-    public List<AnimalModel> getAll();
+
+    AnimalModel add(AnimalModel animalModel);
+
+    Optional<AnimalModel> getById(String id);
+
+    void removeAll();
+
+    Optional<AnimalModel> getByName(String name);
+
+    List<AnimalModel> getAll();
+
+    AnimalModel update(AnimalModel animalModel);
 }
