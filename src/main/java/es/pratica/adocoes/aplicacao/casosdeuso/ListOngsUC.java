@@ -17,3 +17,4 @@ public class ListOngsUC {
         return this.ongService.getAll().stream().map(OngResponseDto::fromModel).toList();
     }
 }
+    
