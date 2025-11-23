@@ -12,6 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,13 +24,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.web.multipart.MultipartFile;
-
 import es.pratica.adocoes.aplicacao.casosdeuso.CreateAnimalUC;
 import es.pratica.adocoes.aplicacao.casosdeuso.GetAnimalUC;
-import es.pratica.adocoes.aplicacao.casosdeuso.UpdateAnimalStatusUC;
 import es.pratica.adocoes.aplicacao.dtos.AnimalCreateDto;
 import es.pratica.adocoes.aplicacao.dtos.AnimalResponseDto;
-import es.pratica.adocoes.aplicacao.dtos.UpdateAnimalStatusDto;
 import es.pratica.adocoes.dominio.servicos.interfaceservice.FileStorageServiceInterface;
 
 import jakarta.validation.Valid;
@@ -50,9 +48,13 @@ public class AnimalController {
     // -------------------------------------------------------
     @PostMapping("/create")
     @CrossOrigin("*")
-    public ResponseEntity<AnimalResponseDto> createAnimal(
-            @RequestBody @Valid AnimalCreateDto animalCreateDto) {
-
+    public ResponseEntity<?> createAnimal(
+            @RequestBody @Valid AnimalCreateDto animalCreateDto, BindingResult bindingResult) {
+        
+        if(bindingResult.hasErrors()){
+            String erro = bindingResult.getFieldErrors().get(0).getDefaultMessage();
+            return ResponseEntity.badRequest().body(erro);
+        }
         var createdAnimal = this.createAnimalUC.run(animalCreateDto);
 
         if (createdAnimal == null) {
@@ -72,9 +74,13 @@ public class AnimalController {
             @RequestParam("file") MultipartFile file) {
 
         try {
+            // 1️⃣ Salva arquivo no disco
             String filename = fileStorageService.storeFile(file);
+
+            // 2️⃣ Atualiza o animal com o nome da foto
             createAnimalUC.attachPhotoToAnimal(id, filename);
 
+            // 3️⃣ Resposta pro front
             Map<String, String> response = new HashMap<>();
             response.put("filename", filename);
             response.put("url", "/api/animal/photo/" + filename);
@@ -89,9 +95,8 @@ public class AnimalController {
         }
     }
 
-    // -------------------------------------------------------
-    // GET PHOTO
-    // -------------------------------------------------------
+
+
     @GetMapping("/photo/{filename}")
     @CrossOrigin("*")
     public ResponseEntity<Resource> getPhoto(@PathVariable String filename) {
@@ -121,7 +126,7 @@ public class AnimalController {
     // -------------------------------------------------------
     @GetMapping("/pets")
     @CrossOrigin("*")
-    public ResponseEntity<List<AnimalResponseDto>> getAll() {
+    public ResponseEntity<List<AnimalResponseDto>> getAll(){
         return new ResponseEntity<>(this.getAnimalUC.getAll(), HttpStatus.OK);
     }
 
