@@ -137,11 +137,11 @@ public class AnimalController {
     // -------------------------------------------------------
     // UPDATE STATUS
     // -------------------------------------------------------
-    @PutMapping("/status/{id}")
+    @PutMapping("/status")
     @CrossOrigin("*")
-    public ResponseEntity<?> updateStatus(@PathVariable String id, @RequestBody UpdateAnimalStatusDto dto) {
+    public ResponseEntity<?> updateStatus(@RequestBody UpdateAnimalStatusDto dto) {
 
-        var updated = updateAnimalStatusUC.run(id, dto.getStatus());
+        var updated = updateAnimalStatusUC.run(dto);
 
         if (updated == null) {
             return new ResponseEntity<>("Animal not found", HttpStatus.NOT_FOUND);
