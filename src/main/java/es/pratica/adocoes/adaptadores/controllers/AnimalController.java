@@ -32,7 +32,7 @@ import es.pratica.adocoes.aplicacao.dtos.AnimalCreateDto;
 import es.pratica.adocoes.aplicacao.dtos.AnimalResponseDto;
 import es.pratica.adocoes.aplicacao.dtos.UpdateAnimalStatusDto;
 import es.pratica.adocoes.dominio.servicos.interfaceservice.FileStorageServiceInterface;
-
+import es.pratica.adocoes.aplicacao.dtos.UpdateAnimalStatusDto;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 

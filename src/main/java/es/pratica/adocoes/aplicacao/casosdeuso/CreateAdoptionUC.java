@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 import es.pratica.adocoes.dominio.interfacerepositorios.AdoptionRepository;
 import es.pratica.adocoes.dominio.interfacerepositorios.AnimalRepository;
+import es.pratica.adocoes.dominio.interfacerepositorios.TutorRepository;
 import es.pratica.adocoes.dominio.interfacerepositorios.UserRepository;
 import es.pratica.adocoes.dominio.modelos.AdoptionModel;
 import es.pratica.adocoes.dominio.modelos.AnimalModel;
@@ -15,11 +16,13 @@ public class CreateAdoptionUC {
     private final AdoptionRepository adoptionRepository;
     private final AnimalRepository animalRepository;
     private final UserRepository userRepository;
+    private final TutorRepository tutorRepository;
 
-    public CreateAdoptionUC(AdoptionRepository adoptionRepository, AnimalRepository animalRepository, UserRepository userRepository) {
+    public CreateAdoptionUC(AdoptionRepository adoptionRepository, AnimalRepository animalRepository, UserRepository userRepository, TutorRepository tutorRepository) {
         this.adoptionRepository = adoptionRepository;
         this.animalRepository = animalRepository;
         this.userRepository = userRepository;
+        this.tutorRepository = tutorRepository;
     }
 
     public AdoptionModel run(String animalId, String adopterId, String tutorId) {
@@ -29,7 +32,7 @@ public class CreateAdoptionUC {
         if (!userRepository.getById(adopterId).isPresent()) {
             throw new IllegalArgumentException("Adotante com ID " + adopterId + " não encontrado.");
         }
-        if (!userRepository.getById(tutorId).isPresent()) {
+        if (!tutorRepository.getById(tutorId).isPresent()) {
             throw new IllegalArgumentException("Tutor com ID " + tutorId + " não encontrado.");
         }
         if (!animal.getStatus().equals(StatusPet.AVAILABLE)) {
