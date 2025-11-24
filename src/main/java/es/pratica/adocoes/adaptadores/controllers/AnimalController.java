@@ -26,10 +26,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import es.pratica.adocoes.aplicacao.casosdeuso.CreateAnimalUC;
 import es.pratica.adocoes.aplicacao.casosdeuso.GetAnimalUC;
+import es.pratica.adocoes.aplicacao.casosdeuso.UpdateAnimalStatusUC;
 import es.pratica.adocoes.aplicacao.dtos.AnimalCreateDto;
 import es.pratica.adocoes.aplicacao.dtos.AnimalResponseDto;
 import es.pratica.adocoes.dominio.servicos.interfaceservice.FileStorageServiceInterface;
-
+import es.pratica.adocoes.aplicacao.dtos.UpdateAnimalStatusDto;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
