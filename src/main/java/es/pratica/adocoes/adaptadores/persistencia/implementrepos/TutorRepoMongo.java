@@ -32,5 +32,13 @@ public class TutorRepoMongo implements TutorRepository{
         }
         return Optional.empty();
     }
+
+    public Optional<TutorModel> getById(String id){
+        var response = tutorRepo.findById(id);
+        if(response.isPresent()){
+            return response.map(TutorModel::toModel);
+        }
+        return Optional.empty();
+    }
     
 }
