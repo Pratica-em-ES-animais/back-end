@@ -11,4 +11,5 @@ public interface AnimalServiceInterface {
     Optional<AnimalModel> getById(String id);
     Optional<AnimalModel> getByName(String name);
     public List<AnimalModel> getAll();
+    public void deleteById(String id);
 }

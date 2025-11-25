@@ -39,4 +39,9 @@ public class AnimalService implements AnimalServiceInterface {
     public List<AnimalModel> getAll() {
         return this.animalRepositorio.getAll();
     }
+
+    @Override
+    public void deleteById(String id) {
+        this.animalRepositorio.removeById(id);
+    }
 }

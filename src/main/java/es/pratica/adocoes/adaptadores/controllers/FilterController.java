@@ -4,6 +4,7 @@ package es.pratica.adocoes.adaptadores.controllers;
 import es.pratica.adocoes.aplicacao.casosdeuso.FilterPetsUC;
 import es.pratica.adocoes.aplicacao.dtos.PetCompatibilityDto;
 import es.pratica.adocoes.aplicacao.dtos.UserDto;
+import es.pratica.adocoes.dominio.enums.StatusPet;
 import es.pratica.adocoes.dominio.modelos.AnimalModel;
 import es.pratica.adocoes.dominio.servicos.AnimalService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 @RestController
 @RequestMapping("api/filter")
@@ -36,8 +38,8 @@ public class FilterController {
         if (user == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Usuário não autenticado");
         }
-
-        List<AnimalModel> pets = animalService.getAll();
+        
+        List<AnimalModel> pets = animalService.getAll().stream().filter(a -> a.getStatus() == StatusPet.AVAILABLE ).toList();
         return useCase.execute(user, pets, 3);
     }
 }

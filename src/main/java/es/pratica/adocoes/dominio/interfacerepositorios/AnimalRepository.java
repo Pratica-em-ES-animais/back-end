@@ -13,9 +13,12 @@ public interface AnimalRepository {
 
     void removeAll();
 
+    void removeById(String id); // ← novo método
+
     Optional<AnimalModel> getByName(String name);
 
     List<AnimalModel> getAll();
 
     AnimalModel update(AnimalModel animalModel);
 }
+
