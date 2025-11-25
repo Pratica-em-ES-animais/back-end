@@ -1,10 +1,10 @@
 package es.pratica.adocoes.dominio.servicos.interfaceservice;
+import es.pratica.adocoes.aplicacao.dtos.PetCompatibilityDto;
 import es.pratica.adocoes.aplicacao.dtos.UserDto;
 import es.pratica.adocoes.dominio.modelos.AnimalModel;
 
 import java.util.List;
-import java.util.Map;
 
 public interface CompatibilityFilterServiceInterface {
-    List<Map<String, Object>> filter(UserDto userProfile, List<AnimalModel> pets, int topN);
+    List<PetCompatibilityDto> filter(UserDto user, List<AnimalModel> pets, int topK);
 }

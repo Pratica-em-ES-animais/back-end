@@ -3,7 +3,7 @@ package es.pratica.adocoes.aplicacao.casosdeuso;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import es.pratica.adocoes.dominio.enums.StatusPet;
+import es.pratica.adocoes.aplicacao.dtos.UpdateAnimalStatusDto;
 import es.pratica.adocoes.dominio.interfacerepositorios.AnimalRepository;
 import es.pratica.adocoes.dominio.modelos.AnimalModel;
 import lombok.AllArgsConstructor;
@@ -14,14 +14,14 @@ public class UpdateAnimalStatusUC {
 
     private final AnimalRepository animalRepository;
 
-    public AnimalModel run(String animalId, StatusPet newStatus) {
+    public AnimalModel run(UpdateAnimalStatusDto dto) {
 
-        var animal = animalRepository.getById(animalId).orElse(null);
+        var animal = animalRepository.getById(dto.getAnimalId()).orElse(null);
         if (animal == null) {
             return null;
         }
 
-        animal.setStatus(newStatus);
+        animal.setStatus(dto.getStatus());
 
         return animalRepository.update(animal);
     }

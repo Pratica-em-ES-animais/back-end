@@ -1,6 +1,9 @@
 package es.pratica.adocoes.aplicacao.casosdeuso;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
+
 import es.pratica.adocoes.aplicacao.dtos.TutorCreateDto;
 import es.pratica.adocoes.aplicacao.dtos.TutorResponseDto;
 import es.pratica.adocoes.dominio.servicos.interfaceservice.TutorServiceInterface;

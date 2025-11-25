@@ -31,4 +31,7 @@ public class TutorEntity {
     public static TutorEntity fromModel(TutorModel tutorModel){
         return new TutorEntity(tutorModel.getId(), tutorModel.getCpf(), tutorModel.getFirstName(), tutorModel.getLastName(), tutorModel.getEmail(),tutorModel.getDdd(),tutorModel.getPhone(),tutorModel.getSenha(), OngEntity.fromModel(tutorModel.getOngModel()), tutorModel.getRole());
     }
+
+    
+    
 }

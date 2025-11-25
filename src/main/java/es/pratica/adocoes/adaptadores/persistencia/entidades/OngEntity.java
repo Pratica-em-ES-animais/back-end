@@ -37,4 +37,10 @@ public class OngEntity {
         ongModel.getDdd(),ongModel.getPhone(),AddressEntity.fromModel(ongModel.getAddressModel()));
     }
 
+
+    public OngModel toModel() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'toModel'");
+    }
+
 }

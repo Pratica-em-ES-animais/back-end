@@ -24,11 +24,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.web.multipart.MultipartFile;
+
 import es.pratica.adocoes.aplicacao.casosdeuso.CreateAnimalUC;
 import es.pratica.adocoes.aplicacao.casosdeuso.GetAnimalUC;
 import es.pratica.adocoes.aplicacao.casosdeuso.UpdateAnimalStatusUC;
 import es.pratica.adocoes.aplicacao.dtos.AnimalCreateDto;
 import es.pratica.adocoes.aplicacao.dtos.AnimalResponseDto;
+import es.pratica.adocoes.aplicacao.dtos.UpdateAnimalStatusDto;
 import es.pratica.adocoes.dominio.servicos.interfaceservice.FileStorageServiceInterface;
 import es.pratica.adocoes.aplicacao.dtos.UpdateAnimalStatusDto;
 import jakarta.validation.Valid;
@@ -96,8 +98,9 @@ public class AnimalController {
         }
     }
 
-
-
+    // -------------------------------------------------------
+    // GET PHOTO
+    // -------------------------------------------------------
     @GetMapping("/photo/{filename}")
     @CrossOrigin("*")
     public ResponseEntity<Resource> getPhoto(@PathVariable String filename) {
@@ -134,11 +137,11 @@ public class AnimalController {
     // -------------------------------------------------------
     // UPDATE STATUS
     // -------------------------------------------------------
-    @PutMapping("/status/{id}")
+    @PutMapping("/status")
     @CrossOrigin("*")
-    public ResponseEntity<?> updateStatus(@PathVariable String id, @RequestBody UpdateAnimalStatusDto dto) {
+    public ResponseEntity<?> updateStatus(@RequestBody UpdateAnimalStatusDto dto) {
 
-        var updated = updateAnimalStatusUC.run(id, dto.getStatus());
+        var updated = updateAnimalStatusUC.run(dto);
 
         if (updated == null) {
             return new ResponseEntity<>("Animal not found", HttpStatus.NOT_FOUND);
