@@ -52,4 +52,9 @@ public class AnimalRepoMongo implements AnimalRepository {
         var saved = animalRepo.save(AnimalEntity.fromModel(animalModel));
         return AnimalModel.toModel(saved);
     }
+
+    @Override
+    public void removeById(String id) {
+        animalRepo.deleteById(id);
+    }
 }
